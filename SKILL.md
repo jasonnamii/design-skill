@@ -92,6 +92,7 @@ description: |
 | 열 상한 | 최대 3열. 4열+ 금지 |
 | 구분선 | hr 대신 배경색 전환 또는 여백 |
 | CTA 기본 | 텍스트 링크 + ">" 화살표. 버튼=최종 전환점에서만 |
+| CTA 색상 변형 | hover/active는 `filter: brightness(1.15)` 또는 `filter: brightness(0.85)`로만 구현. hex/rgb로 별도 hover 색상 지정 절대 금지. 의미 표시(성공/실패/체크)는 텍스트 기호(✓/—/✗)로 대체, 별도 유채색 금지 |
 
 ### CORE 예외
 
