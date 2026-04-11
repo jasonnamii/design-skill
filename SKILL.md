@@ -1,11 +1,11 @@
 ---
 name: design-skill
 description: |
-  Apple 디자인 엔진. 4층 콘텐츠→디자인 자동 매핑. 6포맷·5톤·18패턴. 공리 4개 기반.
-  P1: 디자인스킬, design skill, 디자인, 애플디자인, 심플디자인, 미니멀디자인, 깔끔하게, 이쁘게만들어, 디자인적용.
-  P2: 디자인해줘, 만들어줘, 적용해줘, 꾸며줘, design this, apply design, style this.
+  Apple 디자인 엔진. 4층 콘텐츠→디자인 자동 매핑. 6포맷·5톤·18패턴. 공리 4개 기반. md 시각문법(이쁘니 프로토콜) 통합.
+  P1: 디자인스킬, design skill, 디자인, 애플디자인, 심플디자인, 미니멀디자인, 깔끔하게, 이쁘게만들어, 디자인적용, 이쁘니.
+  P2: 디자인해줘, 만들어줘, 적용해줘, 꾸며줘, 이쁘니 해줘, design this, apply design, style this.
   P3: Apple design, minimal design, design system, content-driven design.
-  P4: 산출물 생성시, 문서 디자인 요청시, 포맷 스킬 cascade시.
+  P4: 산출물 생성시, 문서 디자인 요청시, 포맷 스킬 cascade시, md 시각문법 적용시.
   P5: .html로, .md로, .pptx로, .docx로, .xlsx로, .pdf로.
   NOT: UI설계(→ui-action-designer), 옵시디언문법(→obsidian-markdown), 산출물구조(→deliverable-engine).
 "@uses":
@@ -21,6 +21,7 @@ description: |
   - references/tone-clean-info.md
   - references/tone-pro-grid.md
   - references/tone-story-dark.md
+  - references/protocol-pretty.md
 ---
 
 # Design Skill
@@ -41,6 +42,7 @@ description: |
 | PDF | → `references/format-pdf.md` | 톤이 페이지 방향 결정 (dark-cinema/story-dark=landscape) |
 | 특수 기능 (형광펜, 그래디언트 등) | → `references/special-features.md` | "해당 없음" fallback 규칙 포함 |
 | 톤 세부조정 필요시 | → `references/tone-{preset}.md` | |
+| md 시각문법 (이쁘니) | → `references/protocol-pretty.md` | md 콜아웃·강약·밀도교대의 SSOT |
 
 **필요한 spoke만 로드.** HTML 작업시 PPTX spoke 불필요.
 
@@ -198,10 +200,13 @@ Layer 1 문서전체 → Layer 2 섹션 → Layer 3 블록 → Layer 4 요소
    ├─ 확신도 ≥70 → 3으로
    └─ 확신도 <70 → 형에게 "~톤으로 진행합니다" 1줄 확인 → 3으로
 3. 포맷 결정 → 해당 format spoke 1개 + tone spoke 1개 로드
+   ├─ md 포맷 → format-md.md + protocol-pretty.md 함께 로드
+   └─ 기타 포맷 → 해당 format spoke만
 4. Layer 2: 섹션 분해 + 역할 판단 + 리듬 설계
 5. Layer 3: 블록별 콘텐츠 신호 탐지 → 패턴 자동 매칭 (충돌 시 §2 L3 3단계 체인)
 6. Layer 4: 요소별 포인트 디자인 (자동+수동)
 7. QC: CORE 7 + GUARD 8 체크
+   ├─ md 포맷 → protocol-pretty.md QC 항목(①~⑧)도 함께 검사
    ├─ PASS → 8으로
    ├─ FAIL → 위반 항목의 Layer로 롤백 (C1~C5 위반 → Step 4, G1~G8 위반 → Step 6)
    └─ 동일 항목 3회 FAIL → 형에게 에스컬레이션
@@ -215,8 +220,9 @@ Layer 1 문서전체 → Layer 2 섹션 → Layer 3 블록 → Layer 4 요소
 | 스킬 | 관계 |
 |------|------|
 | pptx, docx, xlsx, pdf | design-skill→디자인 값, 해당 스킬→기술 구현 |
-| html-div-style | HTML시 design-skill 우선. md시 옵시디언 규칙 cascade |
-| deliverable-engine | 구조=DE, 디자인=design-skill |
+| html-div-style | 옵시디언 .md 내 HTML div 래핑 전용. design-skill의 CORE·톤을 따르며, div 렌더링 안전성만 담당 |
+| deliverable-engine | 구조=DE, 디자인=design-skill. DE는 디자인을 design-skill에 위임 |
+| protocol-pretty (이쁘니) | **design-skill 산하.** md 시각문법(콜아웃·강약·밀도교대·QC)의 SSOT. `references/protocol-pretty.md`로 내장 |
 | apple-design-style | **대체됨** |
 
 ---
@@ -229,3 +235,5 @@ Layer 1 문서전체 → Layer 2 섹션 → Layer 3 블록 → Layer 4 요소
 - **XLSX 여백:** C4를 XLSX에 적용하면 데이터가 너무 적어진다. 행높이 ×1.2, 열너비 ×1.3으로 번역.
 - **섹션 역할 미포괄:** Layer 2의 7개 역할이 모든 섹션 유형을 포괄하지 못할 수 있다 (예: FAQ, 용어집, 타임라인). 미포괄 시 가장 유사한 역할로 매핑하되, 확신 없으면 형에게 확인.
 - **spoke 간 배경색 충돌:** format spoke의 기본 배경 순서와 tone spoke가 다를 수 있다. 라우팅의 "충돌 시 우선순위" (tone > format)를 따른다.
+- **이쁘니 직접수행 금지:** "마크다운 정리 정도는 직접 하면 된다"고 판단하는 패턴. 이쁘니는 L1~L5 강약매핑+볼드 과용 체크+diff QC를 포함하는 5단계 프로토콜. protocol-pretty.md 로드 없이 직접 수행 = FAIL.
+- **md 콜아웃과 format-md 충돌:** format-md.md의 타이포/여백 규칙은 CORE를 md로 번역한 것. 콜아웃 체계는 protocol-pretty.md가 SSOT — format-md.md가 아님.
