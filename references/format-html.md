@@ -1,0 +1,61 @@
+# Format: HTML
+
+## 폰트
+
+Pretendard Variable CDN: `https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css`
+
+| 레벨 | size | wght | letter-spacing | line-height | color (light bg) | color (dark bg) |
+|------|------|------|---------------|-------------|-----------------|----------------|
+| L1 | clamp(48px, 6vw, 72px) | 800-900 | -2px | 1.1 | #1d1d1f | #f5f5f7 |
+| L2 | clamp(28px, 4vw, 40px) | 600-700 | -1px | 1.2 | #1d1d1f | #f5f5f7 |
+| L3 | clamp(18px, 2.5vw, 24px) | 400-500 | 0 | 1.4 | #1d1d1f | #ccc |
+| L4 | clamp(14px, 1.5vw, 17px) | 400 | 0 | 1.7 | #6e6e73 | #86868b |
+| XS | 12px | 400-600 | 0 | 1.4 | #86868b | #666 |
+
+## 레이아웃
+
+```css
+section { padding: 80px 0; }  /* 최소. 히어로/클로징은 120px+ */
+.content { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+```
+
+그리드: CSS Grid, max 3col, gap 20px.
+좌우분할: `grid-template-columns: 45% 55%` or `40% 60%`. 다음 섹션 미러.
+
+## 배경 전환
+
+기본 순서: `#fff` → `#f5f5f7` → `#fff` → `#000` → `#fff`
+**톤 spoke가 다른 배경 순서를 지정하면 톤 우선** (SKILL.md 라우팅 "충돌 시 우선순위" 참조).
+다크 section 내 모든 텍스트 color 재지정 필수.
+
+## CTA
+
+```html
+<a href="#" style="color: var(--cta-color, #0066cc); text-decoration: none;">
+  자세히 알아보기 <span style="font-size: 1.2em;">›</span>
+</a>
+```
+
+필 버튼 (최종 전환점):
+```html
+<a href="#" style="background: var(--cta-color, #0066cc); color: #fff; padding: 12px 24px; border-radius: 980px; text-decoration: none; font-weight: 600;">
+  시작하기
+</a>
+```
+
+## 애니메이션 (선택)
+
+IntersectionObserver fade-in: `opacity 0→1, translateY(30px→0), transition 0.6s ease`
+
+## 이미지
+
+`object-fit: cover`. 전폭: width 100%, border-radius 0. 카드형: border-radius 16px.
+텍스트와 항상 영역 분리 (C6).
+
+## 체크리스트
+
+- [ ] Pretendard CDN import
+- [ ] 배경색 교대 적용
+- [ ] CTA 컬러 CSS 변수 사용
+- [ ] 다크 섹션 텍스트 color 재지정
+- [ ] max-width 980px 콘텐츠 영역
