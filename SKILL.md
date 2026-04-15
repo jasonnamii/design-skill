@@ -7,7 +7,7 @@ description: |
   P3: Apple design, minimal design, design system, content-driven design.
   P4: 산출물 생성시, 문서 디자인 요청시, 포맷 스킬 cascade시, md 시각문법 적용시.
   P5: .html로, .md로, .pptx로, .docx로, .xlsx로, .pdf로.
-  NOT: UI설계(→ui-action-designer), 옵시디언문법(→obsidian-markdown), 산출물구조(→deliverable-engine).
+  NOT: UI설계(→ui-action-designer), 옵시디언문법(→obsidian-markdown), 산출물구조.
 "@uses":
   - references/format-html.md
   - references/format-md.md
@@ -221,7 +221,6 @@ Layer 1 문서전체 → Layer 2 섹션 → Layer 3 블록 → Layer 4 요소
 |------|------|
 | pptx, docx, xlsx, pdf | design-skill→디자인 값, 해당 스킬→기술 구현 |
 | html-div-style | 옵시디언 .md 내 HTML div 래핑 전용. design-skill의 CORE·톤을 따르며, div 렌더링 안전성만 담당. **md 포맷 + div 사용 시 design-skill 완료 후 html-div-style cascade 필수** |
-| deliverable-engine | 구조=DE, 디자인=design-skill. DE는 디자인을 design-skill에 위임. **DE가 파일 산출 시 design-skill cascade 필수** |
 | ui-action-designer | UI 설계=UIAD, 디자인=design-skill. **UIAD가 아웃풋(PRD .md / HTML 등) 생성 시 design-skill cascade 필수. 대화문 분석만이면 skip** |
 | protocol-pretty (이쁘니) | **design-skill 산하.** md 시각문법(콜아웃·강약·밀도교대·QC)의 SSOT. `references/protocol-pretty.md`로 내장 |
 | apple-design-style | **대체됨** |
