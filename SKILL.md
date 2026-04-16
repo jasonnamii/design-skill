@@ -68,6 +68,23 @@ description: |
 
 규칙 외 상황 → 공리 4개로 판단. 공리에서 도출 불가한 디자인 결정 → 형에게 확인.
 
+### AXIOM_UX_MAPPING — 공리 ↔ Nielsen/Norman 원리 매핑
+
+**허브:** `@ref: references/ux-principles.md#A` (Nielsen 10) + `#B` (Norman 5). 이 스킬은 N4·N6·N8 코어 3원리 적용.
+
+공리는 디자인 판단의 **내부 근거**, UX 원리는 **사용자 경험 검증**. 서로 보강 관계 — 충돌시 공리 우선(스킬 본질).
+
+| 공리 | 연결 UX 원리 | 해석 | CORE 연결 |
+|------|-------------|------|----------|
+| X1 인지 유한성 | N8 MINIMAL · N6 RECOGNITION | 인지부하↓ = 미니멀+재인 | C3·C4·C6 |
+| X2 위계 효율 | N4 CONSISTENCY · D4 MAPPING | 위계=일관 대응의 시각화 | C1·C2·C5 |
+| X3 리듬 원리 | N4 CONSISTENCY · D3 FEEDBACK | 반복=예측(일관), 변화=피드백 | C5·C7 |
+| X4 여백 증폭 | N8 MINIMAL | 여백이 주 정보 가시성 증폭 | C4 |
+
+**사용법:** QC(§4 step 7)시 CORE 위반 판정 후 UX 원리도 함께 점검 — 예: C4 여백 위반 = 동시에 N8 MINIMAL 위반. 수정시 두 관점 모두 해소.
+
+**충돌:** UX 원리가 CORE 수치와 충돌(예: N7 FLEXIBILITY ↔ C3 3색 제한) → **CORE 우선**(스킬 정체성). UX 원리는 CORE 내에서만 조정 근거로 쓴다.
+
 ---
 
 ## §1. CORE — 견고 규칙 7개
@@ -205,8 +222,9 @@ Layer 1 문서전체 → Layer 2 섹션 → Layer 3 블록 → Layer 4 요소
 4. Layer 2: 섹션 분해 + 역할 판단 + 리듬 설계
 5. Layer 3: 블록별 콘텐츠 신호 탐지 → 패턴 자동 매칭 (충돌 시 §2 L3 3단계 체인)
 6. Layer 4: 요소별 포인트 디자인 (자동+수동)
-7. QC: CORE 7 + GUARD 8 체크
+7. QC: CORE 7 + GUARD 8 + UX_MAPPING 체크
    ├─ md 포맷 → protocol-pretty.md QC 항목(①~⑧)도 함께 검사
+   ├─ UX_MAPPING → CORE 위반시 대응 UX 원리(N4·N6·N8) 동시 점검. §0 AXIOM_UX_MAPPING 표 사용
    ├─ PASS → 8으로
    ├─ FAIL → 위반 항목의 Layer로 롤백 (C1~C5 위반 → Step 4, G1~G8 위반 → Step 6)
    └─ 동일 항목 3회 FAIL → 형에게 에스컬레이션
@@ -237,3 +255,5 @@ Layer 1 문서전체 → Layer 2 섹션 → Layer 3 블록 → Layer 4 요소
 - **spoke 간 배경색 충돌:** format spoke의 기본 배경 순서와 tone spoke가 다를 수 있다. 라우팅의 "충돌 시 우선순위" (tone > format)를 따른다.
 - **이쁘니 직접수행 금지:** "마크다운 정리 정도는 직접 하면 된다"고 판단하는 패턴. 이쁘니는 L1~L5 강약매핑+볼드 과용 체크+diff QC를 포함하는 5단계 프로토콜. protocol-pretty.md 로드 없이 직접 수행 = FAIL.
 - **md 콜아웃과 format-md 충돌:** format-md.md의 타이포/여백 규칙은 CORE를 md로 번역한 것. 콜아웃 체계는 protocol-pretty.md가 SSOT — format-md.md가 아님.
+- **UX 원리가 CORE를 덮어쓰려 함:** N7 FLEXIBILITY(유연성)로 C3 3색 확장하려는 유혹 → CORE 우선. UX 원리는 CORE 내 해석 보강만.
+- **AXIOM_UX_MAPPING 미참조:** CORE 위반 수정 후 대응 UX 원리 미점검 → 같은 원인 재발. §0 매핑표로 1회 교차검증.
