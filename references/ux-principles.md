@@ -95,6 +95,26 @@
 
 ---
 
+## §G. AXIOM_UX_MAPPING — design-skill 공리 ↔ UX 원리 매핑
+
+design-skill의 §0 공리(X1~X4)와 이 허브의 Nielsen 10·Norman 5 간 매핑. design-skill 발동 시 CORE 위반 판정과 함께 UX 원리 점검에 사용.
+
+공리는 디자인 판단의 **내부 근거**, UX 원리는 **사용자 경험 검증**. 서로 보강 관계 — 충돌시 공리 우선(스킬 본질).
+
+| 공리 | 연결 UX 원리 | 해석 | CORE 연결 |
+|------|-------------|------|----------|
+| X1 인지 유한성 | N8 MINIMAL · N6 RECOGNITION | 인지부하↓ = 미니멀+재인 | C3·C4·C6 |
+| X2 위계 효율 | N4 CONSISTENCY · D4 MAPPING | 위계=일관 대응의 시각화 | C1·C2·C5 |
+| X3 리듬 원리 | N4 CONSISTENCY · D3 FEEDBACK | 반복=예측(일관), 변화=피드백 | C5·C7 |
+| X4 여백 증폭 | N8 MINIMAL | 여백이 주 정보 가시성 증폭 | C4 |
+
+**사용법:** design-skill §4 워크플로우 step 7(QC)에서 CORE 위반 판정 후 UX 원리도 함께 점검 — 예: C4 여백 위반 = 동시에 N8 MINIMAL 위반. 수정시 두 관점 모두 해소.
+
+**충돌:** UX 원리가 CORE 수치와 충돌(예: N7 FLEXIBILITY ↔ C3 3색 제한) → **CORE 우선**(스킬 정체성). UX 원리는 CORE 내에서만 조정 근거로 쓴다.
+
+---
+
 ## Version
 
+v1.1 — 2026-04-17 — §G AXIOM_UX_MAPPING 통합 (design-skill P0-② 처방)
 v1.0 — 2026-04-16 — 초기 허브 생성 (5개 UX 스킬 공통 참조)

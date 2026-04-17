@@ -1,10 +1,10 @@
 ---
 name: design-skill
 description: |
-  Apple 디자인 엔진. 4층 콘텐츠→디자인 자동 매핑. 6포맷·5톤·18패턴. 공리 4개 기반. md 시각문법(이쁘니 프로토콜) 통합.
-  P1: 디자인스킬, design skill, 디자인, 애플디자인, 심플디자인, 미니멀디자인, 깔끔하게, 이쁘게만들어, 디자인적용, 이쁘니.
+  Apple 디자인 엔진. 4층 콘텐츠→디자인 자동 매핑. 6포맷·5톤·18패턴. 공리 4개. md 이쁘니 프로토콜. HTML/웹MD 모바일 반응형 기본(C8 CORE).
+  P1: 디자인스킬, design skill, 디자인, 애플디자인, 심플디자인, 미니멀디자인, 깔끔하게, 이쁘게만들어, 디자인적용, 이쁘니, 반응형디자인, 모바일디자인.
   P2: 디자인해줘, 만들어줘, 적용해줘, 꾸며줘, 이쁘니 해줘, design this, apply design, style this.
-  P3: Apple design, minimal design, design system, content-driven design.
+  P3: Apple design, minimal design, content-driven, responsive, mobile-first.
   P4: 산출물 생성시, 문서 디자인 요청시, 포맷 스킬 cascade시, md 시각문법 적용시.
   P5: .html로, .md로, .pptx로, .docx로, .xlsx로, .pdf로.
   NOT: UI설계(→ui-action-designer), 옵시디언문법(→obsidian-markdown), 산출물구조.
@@ -22,6 +22,11 @@ description: |
   - references/tone-pro-grid.md
   - references/tone-story-dark.md
   - references/protocol-pretty.md
+  - references/engine-4layer.md
+  - references/ux-principles.md
+  - references/core-rules.md
+  - references/gotchas-extended.md
+  - references/responsive.md
 ---
 
 # Design Skill
@@ -32,19 +37,24 @@ description: |
 
 ## 라우팅
 
+### 로딩 규칙
+
+- **1회 작업당 최대 3개 스포크** — format spoke 1개 + tone spoke 1개 + (md 포맷일 때) `protocol-pretty.md`
+- **`engine-4layer.md`는 §2 진입 시 1회 로드** (§2 워크플로우 진입 시점에만)
+- **`special-features.md`는 S9·S14·S15·S16 등 패턴 매칭 시에만 로드**
+- **`ux-principles.md`는 CORE FAIL 발생 후 QC 재검 시 1회 로드** (§G AXIOM_UX_MAPPING 참조)
+
 | 출력 포맷 | 로드 대상 | 비고 |
 |-----------|-----------|------|
 | HTML | → `references/format-html.md` | |
-| Markdown (.md) | → `references/format-md.md` | |
+| Markdown (.md) | → `references/format-md.md` + `references/protocol-pretty.md` | |
 | PPTX | → `references/format-pptx.md` | 콘텐츠 압축 규칙 포함 |
 | DOCX | → `references/format-docx.md` | |
 | XLSX | → `references/format-xlsx.md` | |
 | PDF | → `references/format-pdf.md` | 톤이 페이지 방향 결정 (dark-cinema/story-dark=landscape) |
 | 특수 기능 (형광펜, 그래디언트 등) | → `references/special-features.md` | "해당 없음" fallback 규칙 포함 |
 | 톤 세부조정 필요시 | → `references/tone-{preset}.md` | |
-| md 시각문법 (이쁘니) | → `references/protocol-pretty.md` | md 콜아웃·강약·밀도교대의 SSOT |
-
-**필요한 spoke만 로드.** HTML 작업시 PPTX spoke 불필요.
+| 4층 엔진 매칭표 | → `references/engine-4layer.md` | L1~L4 표 풀텍스트 |
 
 **충돌 시 우선순위**: tone spoke > format spoke > CORE 기본값.
 톤이 문서 전체의 분위기를 결정하므로, 포맷의 기본 구현을 톤이 오버라이드한다.
@@ -63,27 +73,9 @@ description: |
 | X3 | **리듬 원리** | 반복은 예측을 생성하고, 변화는 주의를 환기한다 | → C5(정렬 이분법), C7(반복 금지) |
 | X4 | **여백 증폭** | 빈 공간은 인접 요소의 지각적 존재감을 높인다 | → C4(여백 철학) |
 
-**부명제** (공리에서 도출, 톤별 CORE 조정의 근거):
-- X2-a: 고밀도 정보에서는 위계 간격 축소가 탐색 효율을 높인다 (→ clean-info의 C1 조정 근거)
+**부명제:** X2-a(고밀도=위계 간격 축소→탐색효율. clean-info C1 조정). 규칙 외 → 공리. 도출불가 → 형 확인.
 
-규칙 외 상황 → 공리 4개로 판단. 공리에서 도출 불가한 디자인 결정 → 형에게 확인.
-
-### AXIOM_UX_MAPPING — 공리 ↔ Nielsen/Norman 원리 매핑
-
-**허브:** `@ref: references/ux-principles.md#A` (Nielsen 10) + `#B` (Norman 5). 이 스킬은 N4·N6·N8 코어 3원리 적용.
-
-공리는 디자인 판단의 **내부 근거**, UX 원리는 **사용자 경험 검증**. 서로 보강 관계 — 충돌시 공리 우선(스킬 본질).
-
-| 공리 | 연결 UX 원리 | 해석 | CORE 연결 |
-|------|-------------|------|----------|
-| X1 인지 유한성 | N8 MINIMAL · N6 RECOGNITION | 인지부하↓ = 미니멀+재인 | C3·C4·C6 |
-| X2 위계 효율 | N4 CONSISTENCY · D4 MAPPING | 위계=일관 대응의 시각화 | C1·C2·C5 |
-| X3 리듬 원리 | N4 CONSISTENCY · D3 FEEDBACK | 반복=예측(일관), 변화=피드백 | C5·C7 |
-| X4 여백 증폭 | N8 MINIMAL | 여백이 주 정보 가시성 증폭 | C4 |
-
-**사용법:** QC(§4 step 7)시 CORE 위반 판정 후 UX 원리도 함께 점검 — 예: C4 여백 위반 = 동시에 N8 MINIMAL 위반. 수정시 두 관점 모두 해소.
-
-**충돌:** UX 원리가 CORE 수치와 충돌(예: N7 FLEXIBILITY ↔ C3 3색 제한) → **CORE 우선**(스킬 정체성). UX 원리는 CORE 내에서만 조정 근거로 쓴다.
+**공리↔UX 매핑(Nielsen10+Norman5):** → `references/ux-principles.md#G_AXIOM_MAPPING`. QC CORE 위반시 대응 UX 원리 동시 점검.
 
 ---
 
@@ -100,95 +92,28 @@ description: |
 | C5 | 정렬 이분법 | 제목=중앙, 본문=좌측. 병렬 레이아웃시 제목 좌측 허용. md 중앙정렬 면제 | 본문중앙→FAIL | X2, X3 |
 | C6 | 텍스트-이미지 분리 | 이미지 위 텍스트 오버레이 금지. 영역 분리 | 오버레이→FAIL | X1 |
 | C7 | 반복 금지 리듬 | 동일 레이아웃 3연속 금지, 동일 밀도 3연속 금지 | 3연속→경고 | X3 |
+| C8 | 반응형 | HTML/웹MD 모바일 우선. clamp·viewport·터치≥44px·≤640px 1열·횡스크롤 금지 | 고정px·viewport누락·횡스크롤→FAIL | X1, X4 |
 
-### CORE 보조
-
-| 규칙 | 내용 |
-|------|------|
-| 폰트 | 1종 통일. Pretendard → Apple SD Gothic Neo → 맑은 고딕 |
-| 열 상한 | 최대 3열. 4열+ 금지 |
-| 구분선 | hr 대신 배경색 전환 또는 여백 |
-| CTA 기본 | 텍스트 링크 + ">" 화살표. 버튼=최종 전환점에서만 |
-| CTA 색상 변형 | hover/active는 `filter: brightness(1.15)` 또는 `filter: brightness(0.85)`로만 구현. hex/rgb로 별도 hover 색상 지정 절대 금지. 의미 표시(성공/실패/체크)는 텍스트 기호(✓/—/✗)로 대체, 별도 유채색 금지 |
-
-### CORE 예외
-
-톤 spoke가 CORE 수치를 조정하는 경우, 해당 톤 spoke 내에 다음 3항을 명시해야 한다:
-1. **조정 항목**: 어떤 C# 규칙의 어떤 수치를 변경하는가
-2. **공리 근거**: §0 공리 또는 부명제에서의 도출 논리
-3. **조정 범위**: 변경되는 수치의 구체적 범위
-
-미명시 조정 = FAIL. 톤 spoke당 CORE 예외 최대 2항.
+**CORE 보조·예외(폰트·열상한·CTA·톤별 3항):** → `references/core-rules.md`
+**C8 반응형 세부(BP·R1~R7·톤별·템플릿):** → `references/responsive.md` (HTML·웹MD 전용)
 
 ---
 
-## §2. 4층 디자인 엔진 — 콘텐츠→디자인 자동 판단
+## §2. 4층 디자인 엔진
+
+콘텐츠→디자인 자동 판단 4층 구조:
 
 ```
-Layer 1 문서전체 → Layer 2 섹션 → Layer 3 블록 → Layer 4 요소
+Layer 1 문서전체(톤) → Layer 2 섹션(역할) → Layer 3 블록(패턴) → Layer 4 요소(포인트)
 ```
 
-### Layer 1: 톤 자동 판단
+**L1~L4 풀 매칭표 + 충돌 해결 2단계:** → `references/engine-4layer.md`
 
-| 콘텐츠 신호 | → 톤 | 배경 주조 | L1 크기 | wght |
-|------------|------|----------|--------|------|
-| 제품/기술/런칭/프리미엄 | dark-cinema | 검정 90%+ | 최대 | 900 |
-| 사람/교육/문화/성장 | warm-human | 흰색 80%+ | 대 | 800 |
-| 스펙/비교/가격/데이터/가이드 | clean-info | 흰+그레이 교대 | 중대 | 700 |
-| B2B/제안/IT/관리/컨설팅 | pro-grid | 흰+그레이 교대 (다크=형 요청시만) | 대 | 800 |
-| 사례/인터뷰/스토리/보고 | story-dark | 검+흰 교대 | 대 | 800 |
-
-형 명시 → 해당. 미명시 → 자동추론. 불가 → clean-info. 세부 → `references/tone-{preset}.md`.
-
-### Layer 2: 섹션 역할
-
-| 역할 | 신호 | 반응 |
-|------|------|------|
-| 히어로 | 첫 섹션, 핵심 1문장 | L1 중앙, 최대 여백 |
-| 기능 소개 | "~할 수 있다" | S8 지그재그, 밝은 배경 |
-| 증거/사례 | 인용·수치·결과 | S2/S1, 다크 전환 |
-| 비교/선택 | A vs B, 스펙 | S3/S10, 밝은 배경 |
-| 행동 유도 | "시작하기", 가격 | CTA 중앙 |
-| 클로징 | 마지막, 비전 | S7, 다크, L1~L2급 |
-| 부록/각주 | 약관, 조건 | S11, XS, 그레이 |
-
-**리듬:** 밝은↔어두운 + 고밀도↔저밀도 + C7(3연속 금지). **배경색 교대 필수:** 동일 배경색(#fff든 #f5f5f7든 #000이든) 3섹션 연속 금지 — 2섹션 연속까지 허용, 3번째는 반드시 다른 배경색으로 전환. 섹션 배치 완료 후 배경색 시퀀스를 점검하고 위반 시 중간에 다크/밝은 섹션을 삽입하라.
-
-### Layer 3: 블록 — 콘텐츠 형태 자동 매칭
-
-| 콘텐츠 형태 | 신호 | → 디자인 패턴 |
-|------------|------|-------------|
-| 구조화 데이터 (행×열) | 2차원 데이터 | S13 데이터 테이블 |
-| 병렬 항목 3~6개 | 동등 중요도, 짧은 설명 | S4 아이콘 그리드 |
-| 병렬 항목 7개+ | 동등 항목 다수 | S5 캐러셀 (HTML) / 분할 (기타) |
-| 순서 단계 1→2→3 | 순차적 프로세스 | S6 스텝 인디케이터 |
-| 비교 대상 2개+ | 동일 기준 병렬 | S3 비교 매트릭스 |
-| 카테고리 분류 | 같은 포맷, 다른 그룹 | S10 탭/필터 (HTML) / 섹션분리 (기타) |
-| 직접 인용 + 발화자 | " " + 이름 | S2 인용문 히어로 |
-| 문제→해결 구조 | 니즈→솔루션 | S8 좌우분할 |
-| 비디오 3개+ | 미디어 링크 | S17 비디오 그리드 (HTML) |
-| 선언/비전/슬로건 | 감성적 1문장 | S7 감성 선언 |
-| 공지/약관/조건 | 법적 고지 | S11 공지 블록 |
-| 톤 전환 지점 | 이전≠다음 목적 | S18 여백 전환 |
-
-**충돌 해결** (복수 패턴 매칭 시 2단계 — 에이전트 자율 범위 확대):
-1. **톤 친화도 우선**: 현재 톤 spoke의 특수 패턴 친화도(★★★>★★>★) 높은 패턴 선택
-2. **구조성 서열**: 톤 친화도 동점 시 → S13 > S3 > S6 > S8 > S4 > 나머지 (구조가 강할수록 에이전트 재량↓, 일관성↑. 공리 X1). **1·2로 결정 가능하면 형 확인 없이 진행** — 선택 사유만 리포트에 기재. 1·2 모두 동점(동일 친화도+동일 서열)인 경우만 형에게 확인
-
-### Layer 4: 요소 — 포인트 디자인
-
-| 패턴 | 자동 조건 | 수동 트리거 |
-|------|-----------|-----------|
-| S1 빅넘버 | 숫자가 블록 핵심메시지 (금액/시간/성능/%) | "숫자강조", "빅넘버" |
-| S9 형광펜 | 3줄+텍스트에서 핵심 구절 존재 | "형광펜", "하이라이트" |
-| S12 배지/태그 | 메타정보(카테고리/날짜/상태) 존재 | "태그", "배지" |
-| S14 그래디언트 텍스트 | ✗ 자동 없음 | "그래디언트" |
-| S15 디바이스 목업 | ✗ 자동 없음 | "목업" |
-| S16 프로모 배너 | ✗ 자동 없음 | "배너" |
-| CTA 텍스트 링크 | "자세히"/"알아보기" 존재 | — |
-| CTA 필 버튼 | 최종 전환 행동 | — |
-
-각 S 패턴의 포맷별 구현 상세 → `references/special-features.md`
+각 층 핵심:
+- **L1 톤 자동 판단** — 콘텐츠 신호 → 5개 톤(dark-cinema/warm-human/clean-info/pro-grid/story-dark) 중 1개
+- **L2 섹션 역할** — 7개 역할(히어로·기능·증거·비교·CTA·클로징·부록) + 배경색 교대 리듬(C7 보조)
+- **L3 블록 패턴 매칭** — 12개 콘텐츠 형태 → S1~S18 패턴 매핑, 충돌 시 [톤 친화도 → 구조성 서열] 2단계 체인
+- **L4 요소 포인트** — 자동(S1·S9·S12) + 수동(S14·S15·S16) 트리거
 
 ---
 
@@ -220,14 +145,13 @@ Layer 1 문서전체 → Layer 2 섹션 → Layer 3 블록 → Layer 4 요소
    ├─ md 포맷 → format-md.md + protocol-pretty.md 함께 로드
    └─ 기타 포맷 → 해당 format spoke만
 4. Layer 2: 섹션 분해 + 역할 판단 + 리듬 설계
-5. Layer 3: 블록별 콘텐츠 신호 탐지 → 패턴 자동 매칭 (충돌 시 §2 L3 3단계 체인)
+5. Layer 3: 블록별 콘텐츠 신호 탐지 → 패턴 자동 매칭 (충돌 시 engine-4layer.md 2단계 체인)
 6. Layer 4: 요소별 포인트 디자인 (자동+수동)
-7. QC: CORE 7 + GUARD 8 + UX_MAPPING 체크
-   ├─ md 포맷 → protocol-pretty.md QC 항목(①~⑧)도 함께 검사
-   ├─ UX_MAPPING → CORE 위반시 대응 UX 원리(N4·N6·N8) 동시 점검. §0 AXIOM_UX_MAPPING 표 사용
-   ├─ PASS → 8으로
-   ├─ FAIL → 위반 항목의 Layer로 롤백 (C1~C5 위반 → Step 4, G1~G8 위반 → Step 6)
-   └─ 동일 항목 3회 FAIL → 형에게 에스컬레이션
+7. QC: CORE 8 + GUARD 8 + UX_MAPPING
+   ├─ md → protocol-pretty.md QC(①~⑧)
+   ├─ HTML·웹MD → C8 체크(viewport·clamp·터치·1열·횡스크롤)
+   ├─ UX_MAPPING → CORE 위반시 N4·N6·N8 동시 점검
+   ├─ FAIL → 롤백(C1~C5·C8→Step4, G1~G8→Step6). 3회 FAIL → 형 에스컬레이션
 8. 산출물 출력
 ```
 
@@ -235,25 +159,29 @@ Layer 1 문서전체 → Layer 2 섹션 → Layer 3 블록 → Layer 4 요소
 
 ## §5. 스킬 연동
 
-| 스킬 | 관계 |
-|------|------|
-| pptx, docx, xlsx, pdf | design-skill→디자인 값, 해당 스킬→기술 구현 |
-| html-div-style | 옵시디언 .md 내 HTML div 래핑 전용. design-skill의 CORE·톤을 따르며, div 렌더링 안전성만 담당. **md 포맷 + div 사용 시 design-skill 완료 후 html-div-style cascade 필수** |
-| ui-action-designer | UI 설계=UIAD, 디자인=design-skill. **UIAD가 아웃풋(PRD .md / HTML 등) 생성 시 design-skill cascade 필수. 대화문 분석만이면 skip** |
-| protocol-pretty (이쁘니) | **design-skill 산하.** md 시각문법(콜아웃·강약·밀도교대·QC)의 SSOT. `references/protocol-pretty.md`로 내장 |
-| apple-design-style | **대체됨** |
+- **pptx/docx/xlsx/pdf:** design-skill=디자인값, 해당스킬=기술구현
+- **html-div-style:** 옵시디언 md+div 래핑. md+div 사용 시 design-skill 완료 후 cascade 필수
+- **ui-action-designer:** UIAD가 아웃풋(PRD .md·HTML) 생성 시 design-skill cascade 필수. 대화문 분석만이면 skip
+- **protocol-pretty(이쁘니):** design-skill 산하. md 시각문법 SSOT. `references/protocol-pretty.md`
+- **apple-design-style:** 대체됨
 
 ---
 
 ## Gotchas
 
-- **톤 과신:** 자동추론이 틀릴 수 있다. 확신도 <70이면 형에게 "~톤으로 진행합니다" 1줄 확인. 확인 없이 진행하다 전면 재작업보다 낫다.
-- **S 패턴 과적용:** 한 블록에 S 패턴 2개 이상 동시 적용 지양. 빅넘버+형광펜 동시는 OK, 하지만 아이콘그리드+좌우분할 동시는 구조 충돌. 충돌 시 §2 L3 3단계 체인 적용.
-- **md에서 타이포 비율 한계:** md는 H1/H2/H3 렌더링 크기를 제어 못함(뷰어 의존). C1은 "위계 4단계 유지"로만 번역.
-- **XLSX 여백:** C4를 XLSX에 적용하면 데이터가 너무 적어진다. 행높이 ×1.2, 열너비 ×1.3으로 번역.
-- **섹션 역할 미포괄:** Layer 2의 7개 역할이 모든 섹션 유형을 포괄하지 못할 수 있다 (예: FAQ, 용어집, 타임라인). 미포괄 시 가장 유사한 역할로 매핑하되, 확신 없으면 형에게 확인.
-- **spoke 간 배경색 충돌:** format spoke의 기본 배경 순서와 tone spoke가 다를 수 있다. 라우팅의 "충돌 시 우선순위" (tone > format)를 따른다.
-- **이쁘니 직접수행 금지:** "마크다운 정리 정도는 직접 하면 된다"고 판단하는 패턴. 이쁘니는 L1~L5 강약매핑+볼드 과용 체크+diff QC를 포함하는 5단계 프로토콜. protocol-pretty.md 로드 없이 직접 수행 = FAIL.
-- **md 콜아웃과 format-md 충돌:** format-md.md의 타이포/여백 규칙은 CORE를 md로 번역한 것. 콜아웃 체계는 protocol-pretty.md가 SSOT — format-md.md가 아님.
-- **UX 원리가 CORE를 덮어쓰려 함:** N7 FLEXIBILITY(유연성)로 C3 3색 확장하려는 유혹 → CORE 우선. UX 원리는 CORE 내 해석 보강만.
-- **AXIOM_UX_MAPPING 미참조:** CORE 위반 수정 후 대응 UX 원리 미점검 → 같은 원인 재발. §0 매핑표로 1회 교차검증.
+- **톤 과신:** 자동추론이 틀릴 수 있다. 확신도 <70이면 형에게 "~톤으로 진행합니다" 1줄 확인.
+- **S 패턴 과적용:** 한 블록에 S 패턴 2개 이상 동시 적용 지양. 충돌 시 `engine-4layer.md` L3 2단계 체인 적용.
+- **섹션 역할 미포괄:** §2 L2 7개 역할이 FAQ·용어집·타임라인 등 모든 유형을 포괄하지 못함. 유사 역할로 매핑하되 확신 없으면 형에게 확인.
+- **UX 원리가 CORE를 덮어쓰려 함:** N7 FLEXIBILITY로 C3 3색 확장하려는 유혹 → CORE 우선. UX 원리는 CORE 내 해석 보강만.
+- **engine-4layer 미로드 상태 §2 진입:** L3 충돌 해결 2단계 체인은 허브에 없음. §2 진입 시 반드시 `engine-4layer.md` 1회 로드.
+- **C8 반응형 4함정:** 고정px폰트(→clamp)·viewport누락(→메타 필수)·고정 다열 그리드(→auto-fit·미디어쿼리)·고정포맷에 C8 강제(→HTML·웹MD 전용). 상세 → `references/responsive.md`
+
+**포맷·프로토콜별 세부 함정(md 타이포 한계·XLSX 여백·이쁘니 직접수행 금지·md 콜아웃 SSOT·AXIOM_UX_MAPPING 미참조·spoke 배경색 충돌):** → `references/gotchas-extended.md`
+
+---
+
+## Version
+
+- v1.2 (2026-04-18) — C8 반응형 CORE 신설, responsive.md
+- v1.1 — 스포크 분리, AXIOM_UX_MAPPING
+- v1.0 — 초기
