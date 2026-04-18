@@ -22,7 +22,8 @@ design-skill CORE C8의 세부 적용 규칙. HTML·웹렌더 MD 전용. PDF·PP
 | R2 | viewport 메타 | `<meta name="viewport" content="width=device-width, initial-scale=1">` | 누락→FAIL |
 | R3 | 터치 타겟 | CTA·링크·버튼 ≥ 44×44px | <44→FAIL |
 | R4 | 그리드 붕괴 | 데스크탑 다열 → 태블릿 2열 → 모바일 1열. 기본: `grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))` | 고정 다열→FAIL |
-| R5 | 횡스크롤 금지 | 긴 테이블·코드는 `overflow-x: auto` 또는 분할 | 발생→FAIL |
+| R4a | **명시적 span 리셋 완전성** | `repeat(N,1fr)` + `grid-column:span K` 패턴(벤토) 사용 시, **base에 `span` 값을 선언한 모든 선택자**(`.col-*`, `.hero`, `.section-head`, `.elev`, `.think`, `.closing` 등 명명 컴포넌트 포함)를 @media 1024px에서는 `span 2` 이하, 640px에서는 `span 1`로 **전부 리셋**. 하나라도 누락시 자식 카드가 **암시적 트랙**을 생성해 그리드가 붕괴하지 않음 (모바일에서 화면 밖으로 밀려 잘림) | 누락→FAIL |
+| R5 | 횡스크롤 금지 | 긴 테이블·코드는 `overflow-x: auto` 또는 분할. 검증: `document.scrollWidth <= window.innerWidth` (모든 타겟 폭에서) | 발생→FAIL |
 | R6 | 패딩 축소 | 데스크탑 80~120px → 모바일 20~32px (미디어쿼리) | 모바일 80+→경고 |
 | R7 | 이미지 반응형 | `max-width: 100%; height: auto` 기본 | 고정 width→경고 |
 
@@ -75,6 +76,7 @@ h1 { font-size: clamp(32px, 6vw, 64px); }
 - [ ] R2: `<head>`에 viewport 메타 존재
 - [ ] R3: CTA·버튼·링크 실측 ≥44×44px
 - [ ] R4: 다열 그리드가 모바일에서 1열로 붕괴
-- [ ] R5: 모바일 실기기 또는 DevTools 375px 뷰포트에서 횡스크롤 없음
+- [ ] R4a: base의 모든 `grid-column:span N` 선언(명명 컴포넌트 포함)이 1024px·640px @media에서 각각 리셋 선언 존재
+- [ ] R5: Playwright/DevTools 360·390·480·640·768·1024px 전 폭에서 `document.scrollWidth == window.innerWidth` (실측. 눈대중 금지)
 - [ ] R6: 모바일 패딩 ≤32px
 - [ ] R7: 이미지 `max-width:100%` 적용
