@@ -1,12 +1,12 @@
 ---
 name: design-skill
 description: |
-  Apple 디자인 엔진. 4층 콘텐츠→디자인 자동 매핑. 6포맷·5톤·18패턴. 공리 4개. md 이쁘니 프로토콜. HTML/웹MD 모바일 반응형 기본(C8 CORE).
-  P1: 디자인스킬, 디자인, 애플디자인, 심플디자인, 미니멀디자인, 깔끔하게, 이쁘게만들어, 디자인적용, 이쁘니, 반응형디자인, 모바일디자인.
-  P2: 디자인해줘, 만들어줘, 적용해줘, 꾸며줘, 이쁘니 해줘, design this, apply design, style this.
-  P3: Apple design, minimal design, content-driven, responsive, mobile-first.
-  P4: 산출물 생성시, 문서 디자인 요청시, 포맷 스킬 cascade시, md 시각문법 적용시.
-  P5: .html로, .md로, .pptx로, .docx로, .xlsx로, .pdf로.
+  Apple 디자인 엔진. 4층 콘텐츠→디자인 자동 매핑. 6포맷·5톤·18패턴. 공리 4개. md 이쁘니 프로토콜. HTML/웹MD 모바일 반응형 기본(C8 CORE) + 시각화 기본(C9 CORE — 차트·다이어그램·타임라인·매트릭스·빅넘버 자동 전환).
+  P1: 디자인스킬, 디자인, 애플디자인, 심플디자인, 미니멀디자인, 깔끔하게, 이쁘게만들어, 디자인적용, 이쁘니, 반응형디자인, 모바일디자인, 시각화, 차트, 다이어그램, 인포그래픽, 타임라인, 매트릭스, 빅넘버, 플로우차트, 순환도, 간트, infographic.
+  P2: 디자인해줘, 만들어줘, 적용해줘, 꾸며줘, 이쁘니 해줘, 시각화해줘, 차트로 만들어줘, 다이어그램으로 바꿔줘, design this, apply design, style this, visualize, infographic.
+  P3: Apple design, minimal design, content-driven, responsive, mobile-first, visualization, chart, diagram, infographic, big-number, timeline, matrix.
+  P4: 산출물 생성시, 문서 디자인 요청시, 포맷 스킬 cascade시, md 시각문법 적용시, HTML 산출물에 시각요소 필요시, 수치비교·프로세스·시간축·관계망 블록 감지시.
+  P5: .html로, .md로, .pptx로, .docx로, .xlsx로, .pdf로, 차트로, 다이어그램으로, 인포그래픽으로.
   NOT: UI설계(→ui-action-designer), 옵시디언문법(→obsidian-markdown), 산출물구조.
 "@uses":
   - references/format-html.md
@@ -27,6 +27,7 @@ description: |
   - references/core-rules.md
   - references/gotchas-extended.md
   - references/responsive.md
+  - references/visualization-html.md
 ---
 
 # Design Skill
@@ -79,7 +80,7 @@ description: |
 
 ---
 
-## §1. CORE — 견고 규칙 7개
+## §1. CORE — 견고 규칙 9개
 
 모든 포맷·톤·상황에서 위반 불가. 톤(L1)이 정해지면 CORE 값은 자동 세팅된다.
 
@@ -93,9 +94,11 @@ description: |
 | C6 | 텍스트-이미지 분리 | 이미지 위 텍스트 오버레이 금지. 영역 분리 | 오버레이→FAIL | X1 |
 | C7 | 반복 금지 리듬 | 동일 레이아웃 3연속 금지, 동일 밀도 3연속 금지 | 3연속→경고 | X3 |
 | C8 | 반응형 | HTML/웹MD 모바일 우선. clamp·viewport·터치≥44px·≤640px 1열·횡스크롤 금지 | 고정px·viewport누락·횡스크롤→FAIL | X1, X4 |
+| C9 | 시각 전환 | HTML/웹MD 시각소스 블록은 시각요소로 전환: 수치비교→차트, 프로세스→플로우, 시간축→타임라인, 관계→다이어그램, 핵심수치→big-number, 2축→매트릭스 | 시각소스2+ & 요소0→FAIL | X1, X2 |
 
 **CORE 보조·예외(폰트·열상한·CTA·톤별 3항):** → `references/core-rules.md`
 **C8 반응형 세부(BP·R1~R7·톤별·템플릿):** → `references/responsive.md` (HTML·웹MD 전용)
+**C9 시각 전환 세부(V1~V10 감지·9종 템플릿·QC):** → `references/visualization-html.md` (HTML·웹MD 전용)
 
 ---
 
@@ -182,6 +185,7 @@ Layer 1 문서전체(톤) → Layer 2 섹션(역할) → Layer 3 블록(패턴) 
 
 ## Version
 
+- v1.4 (2026-04-20) — C9 시각 전환 CORE 신설, visualization-html.md 스포크 추가. HTML 산출물 시각소스→시각요소 자동 전환 의무화
 - v1.3 (2026-04-18) — Oxford Blue #002147 등록 팔레트 추가 (C3 CTA override)
 - v1.2 (2026-04-18) — C8 반응형 CORE 신설, responsive.md
 - v1.1 — 스포크 분리, AXIOM_UX_MAPPING

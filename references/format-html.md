@@ -1,5 +1,7 @@
 # Format: HTML
 
+**시각 전환 의무(C9):** 콘텐츠에 수치비교·시간축·프로세스·순환·2축분류·핵심수치·비율·퍼널 신호가 있으면 시각요소로 전환(표·문장만 ✗). 상세·템플릿 → `visualization-html.md`.
+
 ## 폰트
 
 Pretendard Variable CDN: `https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css`
