@@ -1,13 +1,13 @@
 ---
 name: design-skill
 description: |
-  Apple 디자인 엔진. 4층 콘텐츠→디자인 자동 매핑. 6포맷·5톤·18패턴. 공리 4개. md 이쁘니 프로토콜. HTML/웹MD 모바일 반응형 기본(C8 CORE) + 시각화 기본(C9 CORE — 차트·다이어그램·타임라인·매트릭스·빅넘버 자동 전환).
-  P1: 디자인스킬, 디자인, 애플디자인, 심플디자인, 미니멀디자인, 깔끔하게, 이쁘게만들어, 디자인적용, 이쁘니, 반응형디자인, 모바일디자인, 시각화, 차트, 다이어그램, 인포그래픽, 타임라인, 매트릭스, 빅넘버, 플로우차트, 순환도, 간트, infographic.
-  P2: 디자인해줘, 만들어줘, 적용해줘, 꾸며줘, 이쁘니 해줘, 시각화해줘, 차트로 만들어줘, 다이어그램으로 바꿔줘, design this, apply design, style this, visualize, infographic.
-  P3: Apple design, minimal design, content-driven, responsive, mobile-first, visualization, chart, diagram, infographic, big-number, timeline, matrix.
-  P4: 산출물 생성시, 문서 디자인 요청시, 포맷 스킬 cascade시, md 시각문법 적용시, HTML 산출물에 시각요소 필요시, 수치비교·프로세스·시간축·관계망 블록 감지시.
-  P5: .html로, .md로, .pptx로, .docx로, .xlsx로, .pdf로, 차트로, 다이어그램으로, 인포그래픽으로.
-  NOT: UI설계(→ui-action-designer), 옵시디언문법(→obsidian-markdown), 산출물구조.
+  Apple 디자인 엔진. 4층 콘텐츠→디자인 매핑. 6포맷·6톤·18패턴. md 이쁘니·HTML C8/C9 CORE. 키사스=young-playful 디폴트.
+  P1: 디자인스킬, 디자인, 애플디자인, 미니멀, 이쁘니, 반응형, 시각화, 차트, 다이어그램, 인포그래픽, 빅넘버, 영톤, 플레이풀, young-playful, 키사스.
+  P2: 디자인해줘, 이쁘니 해줘, 시각화해줘, 영하게, design this, visualize.
+  P3: Apple design, responsive, visualization, young-playful, K-12 style, kisas design.
+  P4: 산출물 생성시, 디자인 요청시, HTML 시각요소 필요시.
+  P5: .html, .md, .pptx, .docx, .xlsx, .pdf.
+  NOT: UI설계(→ui-action-designer), 옵시디언문법(→obsidian-markdown).
 "@uses":
   - references/format-html.md
   - references/format-md.md
@@ -21,6 +21,7 @@ description: |
   - references/tone-clean-info.md
   - references/tone-pro-grid.md
   - references/tone-story-dark.md
+  - references/tone-young-playful.md
   - references/protocol-pretty.md
   - references/engine-4layer.md
   - references/ux-principles.md
@@ -33,6 +34,20 @@ description: |
 # Design Skill
 
 콘텐츠가 디자인을 결정한다. Apple KR 20 페이지 기반 4층 엔진.
+
+---
+
+## §-1. 프로젝트 컨텍스트 분기 (Tone Preselect)
+
+톤 판단(§4 Step2) 전에 프로젝트 컨텍스트를 선감지해 디폴트 톤을 바꾼다.
+
+| 컨텍스트 감지 | 디폴트 톤 | 근거 |
+|---------------|-----------|------|
+| 프로젝트 CLAUDE.md에 `project: kisas` / 대화에 "키사스/kisas" / 명시 호출("영톤·플레이풀") | `young-playful` | K-12 Apple 교육 페이지 앵커 |
+| 그 외 | 기존 5톤 중 콘텐츠 매칭 (warm-human / clean-info / dark-cinema / pro-grid / story-dark) | 기존 엔진 |
+
+**오버라이드:** 사용자가 톤을 명시 지정하면 컨텍스트보다 우선. 예: 키사스 프로젝트에서도 "미니멀하게 가줘" → clean-info.
+**C3 예외:** young-playful 선택 시 `tone-young-playful.md` 팔레트(형광펜 5색 + 블록배경 5색)가 C3 "유채색 1색"을 오버라이드한다. G8(그래디언트 1회)은 유지.
 
 ---
 
@@ -97,7 +112,7 @@ description: |
 
 풀매칭표·충돌해결 → `engine-4layer.md`.
 
-- **L1** 5톤(dark-cinema/warm-human/clean-info/pro-grid/story-dark)
+- **L1** 6톤(dark-cinema/warm-human/clean-info/pro-grid/story-dark/young-playful) — young-playful는 §-1 컨텍스트 분기로 선감지
 - **L2** 7역할(히어로·기능·증거·비교·CTA·클로징·부록) + 배경교대(C7)
 - **L3** 12 콘텐츠형태 → S1~S18, 충돌시 [톤친화도→구조서열] 2단계
 - **L4** 자동(S1·S9·S12) + 수동(S14~S16)
@@ -125,7 +140,8 @@ CORE=하한선(FAIL), GUARD=S패턴 과용(경고→수정).
 
 ```
 1. 콘텐츠 수신
-2. L1 톤 판단 (확신도<70 → 형 1줄 확인)
+1-b. §-1 컨텍스트 분기 체크 (프로젝트=키사스 → young-playful 프리셀렉트)
+2. L1 톤 판단 (확신도<70 → 형 1줄 확인). 프리셀렉트 있으면 해당 톤 우선
 3. 포맷 결정 → format 1 + tone 1 로드 (md=+pretty, HTML=+visualization)
 4. L2 섹션 분해 + 역할 + 리듬
 5. L3 블록 신호 → 패턴 매칭 (충돌시 engine-4layer 2단계)
@@ -133,6 +149,7 @@ CORE=하한선(FAIL), GUARD=S패턴 과용(경고→수정).
 7. QC: CORE9 + GUARD8 + UX_MAPPING
    ├─ md → protocol-pretty QC(①~⑧)
    ├─ HTML → C8(viewport·clamp·터치·1열·횡스크롤) + C9(시각소스→요소 전환율)
+   ├─ HTML 정적게이트 → `bash scripts/qc-mobile.sh output.html` (R2·R4b·R8·R9·R10·R11·R1a 검출)
    ├─ FAIL → 롤백(C1~C5·C8·C9→Step4, G→Step6). 3회 FAIL → 형
 8. 출력
 ```
@@ -165,6 +182,8 @@ CORE=하한선(FAIL), GUARD=S패턴 과용(경고→수정).
 
 ## Version
 
+- v1.6 (2026-04-23) — C8 반응형 6규칙 추가(R1a·R4b·R8·R9·R10·R11 in responsive.md). `scripts/qc-mobile.sh` 정적 게이트 신설 — HTML 제출 전 grep 기반 검출. 데스크톱-먼저 설계 함정 섹션 추가 (KISAS_Play_Manifesto.html 수정 루프 교훈)
+- v1.5 (2026-04-20) — young-playful 톤 신설 (K-12 Apple 감성, 키사스 프로젝트 디폴트). §-1 프로젝트 컨텍스트 분기 블록 추가. C3 팔레트 오버라이드 명세. 톤 5 → 6
 - v1.4 (2026-04-20) — C9 시각 전환 CORE 신설, visualization-html.md 스포크 추가. HTML 산출물 시각소스→시각요소 자동 전환 의무화
 - v1.3 (2026-04-18) — Oxford Blue #002147 등록 팔레트 추가 (C3 CTA override)
 - v1.2 (2026-04-18) — C8 반응형 CORE 신설, responsive.md
