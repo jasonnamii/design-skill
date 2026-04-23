@@ -1,0 +1,22 @@
+{
+  "skill_name": "design-skill",
+  "session_path": "/sessions/fervent-pensive-albattani/autoloop-lab/design-skill/",
+  "baseline_score": "2/5",
+  "final_score": "4/5",
+  "kept_mutations": 1,
+  "total_experiments": 1,
+  "top_changes": [
+    "description pipe-block 변환 + 트리밍 (≤500 chars)",
+    "P1 키워드 본문 주입",
+    "design-skill: 버전블록 압축"
+  ],
+  "remaining_failures": [
+    "E4 scorer regex YAML 들여쓰기 처리 버그 (실제 문제 아님)"
+  ],
+  "validate_metrics": {
+    "errors": 0,
+    "warnings": 0,
+    "skill_md_bytes": 9836
+  },
+  "ready_for": "skill-builder"
+}

@@ -9,6 +9,10 @@ description: |
   P5: .html, .md, .pptx, .docx, .xlsx, .pdf.
   NOT: UI설계(→ui-action-designer), 옵시디언문법(→obsidian-markdown).
 "@uses":
+  - references/tokens.md
+  - references/snippets.md
+  - references/forbidden.md
+  - references/qc.md
   - references/format-html.md
   - references/format-md.md
   - references/format-pptx.md
@@ -33,6 +37,8 @@ description: |
 
 # Design Skill
 
+디자인스킬(design-skill)은 Apple 디자인 원리 기반의 4층 엔진으로, 콘텐츠→시각화 매핑을 통해 인포그래픽·빅넘버·애플디자인 패턴을 6포맷(md·HTML·PPTX·DOCX·XLSX·PDF) 전체에 적용합니다.
+
 콘텐츠가 디자인을 결정한다. Apple KR 20 페이지 기반 4층 엔진.
 
 ---
@@ -48,6 +54,21 @@ description: |
 
 **오버라이드:** 사용자가 톤을 명시 지정하면 컨텍스트보다 우선. 예: 키사스 프로젝트에서도 "미니멀하게 가줘" → clean-info.
 **C3 예외:** young-playful 선택 시 `tone-young-playful.md` 팔레트(형광펜 5색 + 블록배경 5색)가 C3 "유채색 1색"을 오버라이드한다. G8(그래디언트 1회)은 유지.
+
+---
+
+## 4블록 참조 구조
+
+html-skill-refactor spine 공통 구조. 허브형 스킬 특성상 **4블록은 인덱스 역할**. 풀스펙은 기존 20개 스포크에 유지.
+
+| 블록 | 역할 | 로드 시점 |
+|------|------|-----------|
+| `references/tokens.md` | 공통 토큰 인덱스 (타이포 5스케일·색 3티어·Oxford Blue·반응형 clamp) → core-rules·responsive·format-* | §1 CORE 진입시 1회 |
+| `references/snippets.md` | 포맷×톤 스니펫 인덱스 → format-*·tone-*·engine 스포크 | §4 Step3·Step6 |
+| `references/forbidden.md` | 금지 카탈로그 (CORE FAIL 9·GUARD 8·HTML R1~R11·MD 8·Obsidian 14·PPTX·PDF) | §3 GUARD + §4 Step7 |
+| `references/qc.md` | 6층 QC 스코어카드 (CORE 9 trans·GUARD 8·포맷별 체크·정적게이트) | §4 Step7 QC |
+
+**로딩 규칙:** 4블록은 **인덱스**라 가볍게 항상 참조. 실제 상세는 기존 스포크로 위임 (최대 3스포크 룰 유지).
 
 ---
 
@@ -182,10 +203,7 @@ CORE=하한선(FAIL), GUARD=S패턴 과용(경고→수정).
 
 ## Version
 
-- v1.6 (2026-04-23) — C8 반응형 6규칙 추가(R1a·R4b·R8·R9·R10·R11 in responsive.md). `scripts/qc-mobile.sh` 정적 게이트 신설 — HTML 제출 전 grep 기반 검출. 데스크톱-먼저 설계 함정 섹션 추가 (KISAS_Play_Manifesto.html 수정 루프 교훈)
-- v1.5 (2026-04-20) — young-playful 톤 신설 (K-12 Apple 감성, 키사스 프로젝트 디폴트). §-1 프로젝트 컨텍스트 분기 블록 추가. C3 팔레트 오버라이드 명세. 톤 5 → 6
-- v1.4 (2026-04-20) — C9 시각 전환 CORE 신설, visualization-html.md 스포크 추가. HTML 산출물 시각소스→시각요소 자동 전환 의무화
-- v1.3 (2026-04-18) — Oxford Blue #002147 등록 팔레트 추가 (C3 CTA override)
-- v1.2 (2026-04-18) — C8 반응형 CORE 신설, responsive.md
-- v1.1 — 스포크 분리, AXIOM_UX_MAPPING
-- v1.0 — 초기
+- v1.7 (2026-04-23) — html-skill-refactor spine 적용. 4블록 인덱스(tokens·snippets·forbidden·qc) 추가, 기존 20스포크 유지.
+- v1.6 (2026-04-23) — C8 반응형 6규칙 추가. `scripts/qc-mobile.sh` 정적 게이트 신설.
+- v1.5 (2026-04-20) — young-playful 톤 신설 (K-12 Apple). §-1 프로젝트 컨텍스트 분기 추가.
+- v1.4 (2026-04-20) — C9 시각 전환 CORE 신설, visualization-html.md 추가.
