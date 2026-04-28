@@ -32,6 +32,9 @@ design-skill CORE C8의 세부 적용 규칙. HTML·웹렌더 MD 전용. PDF·PP
 | R9 | **`<br>` 강제 줄바꿈 금지** | 히어로·헤드라인에 `<br>`로 강제 줄바꿈하면 폭 바뀔 때 무조건 깨짐. 자연 wrap + `word-break:keep-all`에 맡김. 예외: 의도적 2줄 연출 + 각 줄이 **최단 뷰포트에서도** 1줄 보장 시만 | 폭 의존 `<br>`→FAIL |
 | R10 | **인라인 `style="font-size:clamp(...)"` 금지** | 인라인 style specificity 1000이 미디어쿼리 덮어씌움 **불가**. 모바일 오버라이드 무력화. 전부 CSS 클래스·변수 경유 | 인라인 clamp→FAIL |
 | R11 | **박스 내부 min-width:0 + overflow:hidden** | flex/grid 자식 박스가 콘텐츠에 밀려 부모 폭 초과. `.box { min-width:0; overflow:hidden }` + `.box .big-text { max-width:100%; overflow-wrap:break-word }` | 오버플로우→FAIL |
+| R12 | **`text-wrap: pretty` 본문 강제** | 한글 본문 마지막 줄에 1~2자만 남는 고아(orphan) 방지. 카드/박스/단락 본문에 `text-wrap: pretty` 강제. Safari 17.4+·Chrome 117+, 미지원 브라우저는 무시(degrade gracefully) | 본문 누락→경고 |
+| R13 | **`text-wrap: balance` 헤드라인** | 짧은 헤드라인(2~4줄)에 `text-wrap: balance` — 줄 길이 균등화. 어색한 단일 단어 줄 방지. 4줄 초과는 `pretty`로 폴백 | 헤드라인 누락→경고 |
+| R14 | **어절 단위 nowrap 보호** | 끊기면 어색한 어절(예: "데이터를 쌓는다", "기회가 찾아오는") = `<span style="white-space:nowrap">` 또는 `.nowrap` 클래스. 자주 쓰는 패턴: 동사구·서술절·고유명사 | 어색한 단어 끊김→경고 |
 
 ---
 
@@ -59,20 +62,27 @@ Obsidian·GitHub은 자체 반응형. HTML div 래핑 시에만 C8 적용. `html
 /* 모바일 우선 기본값 */
 .container { padding: 20px; }
 .grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }  /* R4b */
-h1 {
+h1, .headline {
   font-size: clamp(32px, 6vw, 64px);
-  word-break: keep-all;                /* R8 */
+  word-break: keep-all;                 /* R8 */
   overflow-wrap: break-word;
+  text-wrap: balance;                   /* R13 — 헤드라인 균등화 */
+  line-height: 1.2;
 }
-.box {
+.box, .card, p, .body {
   min-width: 0;                         /* R11 */
   overflow: hidden;
-  word-break: keep-all;
+  word-break: keep-all;                 /* R8 */
+  overflow-wrap: break-word;
+  text-wrap: pretty;                    /* R12 — 본문 고아 방지 */
+  line-height: 1.7;                     /* 한글 본문 가독성 */
 }
 .box .big-text {
   max-width: 100%;                      /* R11 */
   overflow-wrap: break-word;
 }
+/* R14 — 어절 끊김 방지 유틸 */
+.nowrap { white-space: nowrap; }
 
 /* 태블릿 */
 @media (min-width: 641px) {
@@ -115,6 +125,9 @@ h1 {
 - [ ] R6: 모바일 패딩 ≤32px
 - [ ] R7: 이미지 `max-width:100%` 적용
 - [ ] **R8: 한글 헤드라인·박스 전체에 `word-break:keep-all; overflow-wrap:break-word`** (`grep -c "word-break" *.html` ≥ 1)
+- [ ] **R12: 본문에 `text-wrap: pretty`** — 카드·박스·단락 본문 (`grep -c "text-wrap: pretty" *.html` ≥ 1)
+- [ ] **R13: 짧은 헤드라인에 `text-wrap: balance`** — 2~4줄 헤드라인 (`grep -c "text-wrap: balance" *.html` ≥ 1)
+- [ ] **R14: 어색한 어절 끊김 방지 — 동사구·서술절은 `.nowrap`** 또는 `<span style="white-space:nowrap">`로 묶기
 - [ ] **R9: `<br>` 강제 줄바꿈 0건 (히어로·헤드라인)** — 자연 wrap으로 전환
 - [ ] **R10: 인라인 `style="font-size:clamp(...)"` 0건** (`grep -E 'style="[^"]*font-size:[^"]*clamp' *.html` = 0)
 - [ ] **R11: `.box` 선언에 `min-width:0; overflow:hidden` 포함**

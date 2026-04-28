@@ -120,7 +120,7 @@ html-skill-refactor spine 공통 구조. 허브형 스킬 특성상 **4블록은
 | C5 | 정렬 이분법 | 제목=중앙, 본문=좌. 병렬시 제목좌 허용. md면제 | 본문중앙→FAIL | X2·X3 |
 | C6 | 이미지-텍스트 분리 | 오버레이 ✗ | 오버레이→FAIL | X1 |
 | C7 | 반복 금지 | 레이아웃·밀도 3연속 ✗ | 3연속→경고 | X3 |
-| C8 | 반응형(HTML/웹MD) | clamp·viewport·터치≥44·≤640 1열·횡스크롤✗ | 위반→FAIL | X1·X4 |
+| C8 | 반응형(HTML/웹MD) | clamp·viewport·터치≥44·≤640 1열·횡스크롤✗·**한글 줄바꿈 자연화 (R8 keep-all + R12 text-wrap:pretty + R13 balance + R14 nowrap 어절 보호)** | 위반→FAIL | X1·X4 |
 | C9 | 시각 전환(HTML/웹MD) | 시각소스 블록은 시각요소로 전환: 수치비교→차트, 프로세스→플로우, 시간축→타임라인, 관계→다이어그램, 핵심수치→big-number, 2축→매트릭스 | 소스2+ & 요소0→FAIL | X1·X2 |
 
 **세부:** `core-rules.md`(폰트·CTA 보조), `responsive.md`(C8), `visualization-html.md`(C9).

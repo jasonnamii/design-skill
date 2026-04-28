@@ -120,13 +120,94 @@
 }
 ```
 
-### 한글 줄바꿈 (C8 R4a)
+### 한글 줄바꿈 자연화 (C8 R8·R12·R13·R14)
 
 ```css
-.text-ko {
+/* 기본 — 한글 박스/본문 전체 (R8) */
+.text-ko, .box, .card, p, .body {
+  word-break: keep-all;             /* R8 — 어절 단위 끊기 */
+  overflow-wrap: break-word;
+  text-wrap: pretty;                /* R12 — 마지막 줄 고아 단어 방지 */
+  line-height: 1.7;                 /* 한글 가독성 */
+}
+
+/* 짧은 헤드라인 (2~4줄) — 줄 길이 균등화 (R13) */
+.headline, h1, h2, .title {
+  text-wrap: balance;
   word-break: keep-all;
   overflow-wrap: break-word;
+  line-height: 1.2;
 }
+
+/* 어절 단위 nowrap 보호 (R14) — 끊기면 어색한 동사구·서술절 */
+.nowrap { white-space: nowrap; }
+```
+
+**사용 패턴:**
+```html
+<p class="body">
+  포트폴리오(실력) 위에 협업이력·평판·관계 <span class="nowrap">데이터를 쌓는다.</span>
+</p>
+<p class="body">
+  프로필 생성 즉시 노출. <span class="nowrap">기다리는 게 아니라</span> <span class="nowrap">기회가 찾아오는 구조.</span>
+</p>
 ```
 
 상세 스니펫은 포맷·톤 스포크 각각 참조.
+
+
+## 접기/펴기 스크롤 보정 (A — `scrollBy(delta)` 채택)
+
+**원칙:** 접기/펴기 토글 시 viewport 점프 방지. 4안 비교 후 A 채택 (B·C·D 탈락).
+
+| 방안 | 설명 | 평가 |
+|---|---|---|
+| **A. `scrollBy(delta)`** | 클릭 직후 viewport 중심에 가장 가까운 요소 좌표 캡처. 토글 후 같은 요소 좌표 측정. 차이만큼 보정 | ✅ 채택. 가장 신뢰성 있음 |
+| B. `scroll-margin + :target` | CSS만으로 처리 | ✗ 토글은 target 변경이 아님 |
+| C. `IntersectionObserver` 기반 | 보이는 요소 추적 | 과한 오버헤드 |
+| D. `overflow-anchor` 단독 | 브라우저 자체 앵커링 | summary 토글에 불완전 |
+
+**A 구현:**
+
+```html
+<details class="fold">
+  <summary>접기/펴기 제목</summary>
+  <div class="fold-body">...</div>
+</details>
+
+<script>
+(function () {
+  document.querySelectorAll('details.fold > summary').forEach(function (sum) {
+    sum.addEventListener('click', function () {
+      var midY = window.innerHeight / 2;
+      var anchors = document.querySelectorAll('details, summary, section');
+      var anchor = null, minDist = Infinity;
+      anchors.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        var dist = Math.abs((r.top + r.height / 2) - midY);
+        if (dist < minDist) { minDist = dist; anchor = el; }
+      });
+      if (!anchor) return;
+      var beforeTop = anchor.getBoundingClientRect().top;
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          var afterTop = anchor.getBoundingClientRect().top;
+          var delta = afterTop - beforeTop;
+          if (Math.abs(delta) > 1) window.scrollBy(0, delta);
+        });
+      });
+    });
+  });
+})();
+</script>
+
+<style>
+details.fold { overflow-anchor: auto; }  /* 보조 — A와 병행 */
+</style>
+```
+
+**규칙:**
+- 모든 `<details class="fold">` 토글에 자동 적용
+- viewport 중앙 가까운 요소 기준 보정 (사용자 시선 유지)
+- `requestAnimationFrame` 2회 후 측정 (reflow 완료 보장)
+- delta 1px 이하 무시 (jitter 방지)

@@ -86,6 +86,31 @@
 
 본문 안 컬러 텍스트(빨강·파랑 강조) = 그대로 유지. 회색만 금지.
 
+## HTML 줄바꿈 금지 (C8 R12·R13·R14)
+
+| 금지 | 이유 | 대체 |
+|---|---|---|
+| 본문 `text-wrap: pretty` 누락 | 마지막 줄 고아(orphan) 단어로 어색 | `.body·.box·p`에 `text-wrap: pretty` |
+| 헤드라인 `text-wrap: balance` 누락 | 어색한 단일 단어 줄 발생 | 짧은 헤드라인(2~4줄)에 `text-wrap: balance` |
+| 동사구·서술절 어절 끊김 | "데이터를 / 쌓는다.", "기회가 / 찾아오는" 어색 | `<span class="nowrap">동사구</span>` 또는 `white-space:nowrap` |
+| `<br>` 강제 줄바꿈 (히어로·헤드라인) | 폭 바뀌면 깨짐 | 자연 wrap + R8·R12·R13 조합 |
+| `line-height: 1.4` 이하 (한글 본문) | 한글 가독성 저하 | `line-height: 1.7` 권장 |
+
+상세: `→ responsive.md §R12·R13·R14` · `→ snippets.md §한글 줄바꿈 자연화`.
+
+## 접기/펴기 스크롤 보정 (A 방안 강제)
+
+`<details class="fold">` 토글 시 viewport 점프 방지.
+
+| 방안 | 평가 |
+|---|---|
+| **A. `scrollBy(delta)`** | ✅ 채택. viewport 중앙 가까운 요소 좌표 캡처 → 토글 후 차이만큼 보정 |
+| B. `scroll-margin + :target` | ✗ 토글은 target 변경이 아님 |
+| C. `IntersectionObserver` | ✗ 과한 오버헤드 |
+| D. `overflow-anchor` 단독 | ✗ summary 토글에 불완전 |
+
+A 외 방안 단독 사용 = FAIL. 상세: `→ snippets.md §접기/펴기 스크롤 보정`.
+
 ## Markdown (이쁘니) 금지
 
 `→ protocol-pretty.md §금지` 전수.

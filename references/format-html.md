@@ -8,11 +8,17 @@ Pretendard Variable CDN: `https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.
 
 | 레벨 | size | wght | letter-spacing | line-height | color (light bg) | color (dark bg) |
 |------|------|------|---------------|-------------|-----------------|----------------|
-| L1 | clamp(48px, 6vw, 72px) | 800-900 | -2px | 1.1 | #1d1d1f | #f5f5f7 |
-| L2 | clamp(28px, 4vw, 40px) | 600-700 | -1px | 1.2 | #1d1d1f | #f5f5f7 |
-| L3 | clamp(18px, 2.5vw, 24px) | 400-500 | 0 | 1.4 | #1d1d1f | #ccc |
-| L4 | clamp(14px, 1.5vw, 17px) | 400 | 0 | 1.7 | #6e6e73 | #86868b |
-| XS | 12px | 400-600 | 0 | 1.4 | #86868b | #666 |
+| L1 | clamp(48px, 6vw, 72px) | **900 (Black)** | -2px | 1.1 | `#000` | `#fff` (검정 배경) |
+| L2 (카드 제목) | clamp(28px, 4vw, 40px) | **900 (Black)** | -1px | 1.2 | `#000` | `#fff` (검정 배경) |
+| L3 | clamp(18px, 2.5vw, 24px) | 300 (Light) | 0 | 1.7 | `#000` | `#fff` (검정 배경) |
+| L4 (본문) | clamp(14px, 1.5vw, 17px) | 300 (Light) | 0 | 1.7 | `#000` | `#fff` (검정 배경) |
+| XS (캡션) | 13px | 300 (Light) | 0 | 1.5 | `#000` | `#fff` (검정 배경) |
+
+**한글 줄바꿈 자연화 (R12·R13·R14 적용):**
+- 본문(L3·L4)·박스/카드 = `text-wrap: pretty` + `line-height: 1.7` 강제
+- 짧은 헤드라인(L1·L2, 2~4줄) = `text-wrap: balance`
+- 어색한 어절 (동사구·서술절 "데이터를 쌓는다" 등) = `<span class="nowrap">` 또는 `<span style="white-space:nowrap">` 묶기
+- `<br>` 강제 줄바꿈 ✗ (R9). 자연 wrap에 맡김
 
 ## 레이아웃
 
