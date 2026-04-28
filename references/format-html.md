@@ -40,7 +40,7 @@ section { padding: 80px 0; }  /* 최소. 히어로/클로징은 120px+ */
 
 필 버튼 (최종 전환점):
 ```html
-<a href="#" style="background: var(--cta-color, #0066cc); color: #fff; padding: 12px 24px; border-radius: 980px; text-decoration: none; font-weight: 600;">
+<a href="#" style="background: var(--cta-color, #0066cc); color: #000; padding: 12px 24px; border-radius: 980px; text-decoration: none; font-weight: 900;">
   시작하기
 </a>
 ```

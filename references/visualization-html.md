@@ -60,7 +60,7 @@ HTML 생성 착수 시 콘텐츠를 스캔해 아래 "시각소스"를 찾는다
 .bar-row { display: grid; grid-template-columns: 140px 1fr; gap: 12px; align-items: center; margin-bottom: 10px; }
 .bar-label { font-size: 14px; color: var(--ink-soft); font-weight: 600; }
 .bar-track { background: var(--line-soft); height: 28px; border-radius: 4px; overflow: hidden; }
-.bar-fill { background: var(--ink-mute); color: #fff; height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; font-size: 12px; font-weight: 700; }
+.bar-fill { background: var(--ink-mute); color: #000; height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; font-size: 12px; font-weight: 900; }
 .bar-fill.hi { background: var(--accent); }
 @media (max-width: 640px) { .bar-row { grid-template-columns: 100px 1fr; } }
 </style>
@@ -133,7 +133,7 @@ HTML 생성 착수 시 콘텐츠를 스캔해 아래 "시각소스"를 찾는다
 <style>
 .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap: 12px; align-items: center; margin: 32px 0; }
 .flow-step { background: var(--bg-alt); border: 1px solid var(--line-soft); border-radius: 10px; padding: 20px 14px; text-align: center; }
-.flow-num { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 14px; }
+.flow-num { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: #000; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 14px; }
 .flow-title { font-weight: 700; color: var(--ink); margin-bottom: 4px; font-size: 15px; }
 .flow-desc { font-size: 12px; color: var(--ink-soft); }
 .flow-arrow { color: var(--ink-mute); font-size: 20px; font-weight: 300; }
@@ -181,7 +181,7 @@ HTML 생성 착수 시 콘텐츠를 스캔해 아래 "시각소스"를 찾는다
 .mx-axis-y { grid-row: 1/3; grid-column: 1; writing-mode: vertical-rl; transform: rotate(180deg); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--ink-mute); letter-spacing: 2px; }
 .mx-axis-x { grid-row: 3; grid-column: 2/4; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--ink-mute); letter-spacing: 2px; }
 .mx-cell { border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; justify-content: center; }
-.mx-cell.q1 { background: var(--accent); color: #fff; }
+.mx-cell.q1 { background: var(--accent); color: #000; }
 .mx-cell.q1 .mx-note { color: rgba(255,255,255,0.75); }
 .mx-cell.q2 { background: var(--accent-soft); }
 .mx-cell.q3 { background: var(--bg-alt); }
@@ -242,7 +242,7 @@ HTML 생성 착수 시 콘텐츠를 스캔해 아래 "시각소스"를 찾는다
 </div>
 <style>
 .funnel { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 32px 0; }
-.fn-step { background: var(--accent); color: #fff; padding: 14px 0; text-align: center; font-weight: 700; clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%); }
+.fn-step { background: var(--accent); color: #000; padding: 14px 0; text-align: center; font-weight: 900; clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%); }
 .fn-step:nth-child(2) { background: #254a74; }
 .fn-step:nth-child(3) { background: #4a709e; }
 .fn-step:nth-child(4) { background: #6e8fb8; }

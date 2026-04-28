@@ -56,15 +56,53 @@
 
 ```css
 :root {
-  --label-info:    #1d1d1f;
-  --label-caption: #424245;
-  --label-deco:    #86868b;
+  /* 라이트 모드: 모든 텍스트 검정 (회색 추방) */
+  --label-info:    #000;
+  --label-caption: #000;
+  --label-deco:    #000;
 }
 
-.dark, .key, .hot, [style*="background:#002147"] {
+/* 검정 배경에서만 흰글자 예외 */
+.dark, [style*="background:#000"], [style*="background:#1d1d1f"], [style*="background:#002147"] {
   --label-info:    #fff;
-  --label-caption: #d1d1d6;
-  --label-deco:    #86868b;
+  --label-caption: #fff;
+  --label-deco:    #fff;
+}
+
+/* 컬러 카드 배경 위 = 항상 검정 글자 (흰글자 ✗) */
+.card-pink, .card-yellow, .card-lime, .card-cyan, .card-violet,
+.card-mint, .card-soft-purple, .card-vivid-pink, .card-sky, .card-warm-yellow {
+  --label-info:    #000;
+  --label-caption: #000;
+  --label-deco:    #000;
+}
+```
+
+### 카드 컬러 팔레트 (라이트=캔디 A, 다크=파스텔)
+
+```css
+/* 라이트 모드 캔디 A — 카드 배경 */
+.card-pink   { background: #FF4D8F; color: #000; }
+.card-yellow { background: #FFCB05; color: #000; }
+.card-lime   { background: #4DD964; color: #000; }
+.card-cyan   { background: #3DB3FF; color: #000; }
+.card-violet { background: #A855F7; color: #000; }
+
+/* 다크 모드 파스텔 — 카드 배경 */
+.card-mint         { background: #a8e6cf; color: #000; }
+.card-soft-purple  { background: #d4b8ff; color: #000; }
+.card-vivid-pink   { background: #ff6482; color: #000; }
+.card-sky          { background: #64d2ff; color: #000; }
+.card-warm-yellow  { background: #ffd60a; color: #000; }
+
+/* 카드 제목 wght 900 강제 (C2 weight 대비 600+) */
+.card h2, .card h3, .card .title {
+  font-weight: 900;
+  color: #000;
+}
+.card p, .card .body, .card .caption {
+  font-weight: 300;
+  color: #000;
 }
 ```
 

@@ -10,7 +10,7 @@ Pretendard → fallback Apple SD Gothic Neo → 맑은 고딕. **1종 통일.**
 | L2 | 18 | Semibold | 섹션 제목 |
 | L3 | 14 | Medium (또는 Bold) | 소제목 |
 | L4 | 11 | Regular | 본문 |
-| XS | 9 | Regular | 각주, 캡션. color #86868b |
+| XS | 9 | Regular | 각주, 캡션. color #000 (회색 추방) |
 
 ## 마진
 
