@@ -115,7 +115,7 @@ html-skill-refactor spine 공통 구조. 허브형 스킬 특성상 **4블록은
 |---|------|------|------|------|
 | C1 | 타이포 비율 | L1:L2:L3:L4 = 4:2.3:1.5:1 (±10%) | 이탈→FAIL | X2 |
 | C2 | Weight 대비 | 제목wght − 본문wght ≥ 600 (제목 Black 900 ↔ 본문 Light 300 기본) | <600→FAIL | X2 |
-| C3 | 3색 시스템 | 배경 흰/검/밝은그레이, 유채색=CTA 1색(기본 #0066cc, Oxford Blue #002147 등록). 그래디언트=요청시. **라이트 배경=캔디 A 팔레트, 다크 배경=파스텔** (→ tokens.md §컬러풀 카드 팔레트). **카드/박스 안 텍스트는 항상 검정 — 흰글자는 검정 배경에서만 예외** | 유채색2+→FAIL | X1 |
+| C3 | 3색 시스템 | 배경 흰/검/밝은그레이, 유채색=CTA 1색(기본 #0066cc, Oxford Blue #002147 등록). 그래디언트=요청시. **라이트 배경=캔디 A 팔레트, 다크 배경=파스텔** (→ tokens.md §컬러풀 카드 팔레트). **카드/박스 안 텍스트는 항상 검정 — 흰글자는 검정 배경에서만 예외**. **컬러 시스템 룰 5종(R1~R5) 강제 — → §컬러시스템** | 유채색2+→FAIL·룰위반→FAIL | X1·X2 |
 | C4 | 여백 | 콘텐츠 ≤55% (xlsx: 행×1.2·열×1.3) | >55%→경고 | X4 |
 | C5 | 정렬 이분법 | 제목=중앙, 본문=좌. 병렬시 제목좌 허용. md면제 | 본문중앙→FAIL | X2·X3 |
 | C6 | 이미지-텍스트 분리 | 오버레이 ✗ | 오버레이→FAIL | X1 |
@@ -137,6 +137,45 @@ html-skill-refactor spine 공통 구조. 허브형 스킬 특성상 **4블록은
 - **L2** 7역할(히어로·기능·증거·비교·CTA·클로징·부록) + 배경교대(C7)
 - **L3** 12 콘텐츠형태 → S1~S18, 충돌시 [톤친화도→구조서열] 2단계
 - **L4** 자동(S1·S9·S12) + 수동(S14~S16)
+
+---
+
+## §C. 컬러 시스템 룰 (R1~R5) — v1.8
+
+다중 섹션·다중 카드 문서에서 컬러를 의미 단위로 정렬하는 룰. C3 보강.
+
+| # | 룰 | 정의 | 위반 시 |
+|---|---|---|---|
+| R1 | 페르소나 색 고정 | 같은 인물·역할·고객군은 문서 전체에서 같은 색 1개. 한번 정하면 모든 섹션·표·여정에서 동일 (예: A=pink, B=peach, C=lavender) | FAIL |
+| R2 | TOC ↔ 섹션 시그니처 1:1 | 차례 카드 색 = 해당 섹션 시그니처 색. 섹션 헤드 hl·다크블록 마무리 hl도 같은 색 | 경고 |
+| R3 | 컬러 셀 안 글자 = 블랙(#1d1d1f) | tone-색·인라인 background 컬러 위 텍스트 = 무조건 블랙 강제. dark·tone-white만 화이트. CSS `!important` + 자식 강제 셀렉터로 방어 | FAIL |
+| R4 | 페르소나 색 ↔ 의미 색 분리 | 페르소나에 쓴 색을 다른 용도(긴급/공백/기능 카드 등)에 재사용 ✗. 의미용은 시그니처+yellow·sky·lime·mint 등으로 | 경고 |
+| R5 | 비교 카드 = 무채색 vs 시그니처 | "옛 모델 vs 새 모델" 같은 대조는 dark + tone-시그니처 짝. 페르소나색으로 대조 짓지 ✗ | 경고 |
+
+**적용 범위:** 다중 섹션 BP·리포트·1pager·캠페인 분석. 1섹션 단일 산출물은 R2 면제.
+
+**HTML 구현 핵심 CSS (verbatim 박제 권장):**
+```css
+/* 컬러 배경 안 글자 = 무조건 블랙 강제 (R3) */
+.cell.tone-pink, .cell.tone-pink *, .cell.tone-peach, .cell.tone-peach *,
+.cell.tone-yellow, .cell.tone-yellow *, .cell.tone-lime, .cell.tone-lime *,
+.cell.tone-sky, .cell.tone-sky *, .cell.tone-mint, .cell.tone-mint *,
+.cell.tone-lavender, .cell.tone-lavender *, .cell.tone-pink-vivid, .cell.tone-pink-vivid *,
+[style*="background:var(--lime)"], [style*="background:var(--lime)"] *,
+[style*="background:var(--sky)"], [style*="background:var(--sky)"] *,
+tr[style*="background:var(--sky)"], tr[style*="background:var(--sky)"] * { color:#1d1d1f !important; }
+/* dark·tone-white만 화이트 (예외 2개) */
+.cell.dark, .cell.dark *, .cell.tone-white > .body, .cell.tone-white > .head,
+.cell.tone-white > .cap, .cell.tone-white > p { color:#ffffff !important; }
+/* tone-white 안 자식 컬러 셀은 다시 블랙 (자식 우선) */
+.cell.tone-white .cell.tone-pink, .cell.tone-white .cell.tone-pink *,
+.cell.tone-white .cell.tone-lime, .cell.tone-white .cell.tone-lime * { color:#1d1d1f !important; }
+```
+
+**공통 패턴 통일:**
+- 펼치기(`<details>`) 본문 = 셀 톤 안 / 출처 펼치기 = tone-white 통일
+- 다크블록 마무리 = 한 섹션 끝 1개. hl 색만 시그니처
+- 빅넘버 row(3카드) = 시그니처 + 보조 + 보조
 
 ---
 
@@ -216,6 +255,7 @@ CORE=하한선(FAIL), GUARD=S패턴 과용(경고→수정).
 
 ## Version
 
+- v1.8 (2026-04-29) — §C 컬러 시스템 룰(R1~R5) 신설. C3 보강. 페르소나 색 고정·TOC↔섹션 시그니처·컬러셀 글자 블랙 강제·페르소나↔의미 색 분리·비교카드 무채색vs시그니처. CSS verbatim 박제.
 - v1.7 (2026-04-23) — html-skill-refactor spine 적용. 4블록 인덱스(tokens·snippets·forbidden·qc) 추가, 기존 20스포크 유지.
 - v1.6 (2026-04-23) — C8 반응형 6규칙 추가. `scripts/qc-mobile.sh` 정적 게이트 신설.
 - v1.5 (2026-04-20) — young-playful 톤 신설 (K-12 Apple). §-1 프로젝트 컨텍스트 분기 추가.
