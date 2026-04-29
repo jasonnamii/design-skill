@@ -1,6 +1,26 @@
-# forbidden.md — design-skill 금칙 (4블록 인덱스)
+# forbidden.md — design-skill v3.0 금칙
 
-6포맷 공통 + 포맷별 금지. **CORE 9규칙·GUARD 8규칙이 상위**. 이 파일은 금칙 체크리스트 통합본.
+8조 헌법 + CORE 9 + GUARD 8 통합 금지 카탈로그.
+
+---
+
+## H헌법 FAIL (절대규칙 — 어떤 정당화도 무효)
+
+| # | 금지 | 결과 |
+|---|---|---|
+| H1 | 그라디언트·다른색 배경 (검/흰만 허용) | FAIL |
+| H2 | 본문 텍스트 다채색 | FAIL |
+| H3 | 페이지당 형광펜 0개 | 경고 (G7) |
+| H4 | 회색 사용 (#888·gray·grey 등) | FAIL |
+| H5 | 헤드 weight <900 | FAIL |
+| H6 | 본문 weight ≥600 | FAIL |
+| H7 | 폰트 <12px | FAIL |
+| H8 | viewport 누락·고정px·≤640 다열·횡스크롤·한글줄바꿈 누락 | FAIL |
+
+상세: `→ constitution.md`
+
+---
+
 
 > 공통 금칙: `VAULT/_skills research/html-skill-refactor/spine.md §공통 금칙`
 > 축2 옵시디언: `VAULT/_skills research/html-skill-refactor/axis2-obsidian-rendering.md`

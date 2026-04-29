@@ -1,14 +1,18 @@
 ---
 name: design-skill
 description: |
-  Apple 디자인 엔진. 4층 콘텐츠→디자인 매핑. 6포맷·6톤·18패턴. md 이쁘니·HTML C8/C9 CORE. 키사스=young-playful 디폴트.
-  P1: 디자인스킬, 디자인, 애플디자인, 미니멀, 이쁘니, 반응형, 시각화, 차트, 다이어그램, 인포그래픽, 빅넘버, 영톤, 플레이풀, young-playful, 키사스.
-  P2: 디자인해줘, 이쁘니 해줘, 시각화해줘, 영하게, design this, visualize.
-  P3: Apple design, responsive, visualization, young-playful, K-12 style, kisas design.
-  P4: 산출물 생성시, 디자인 요청시, HTML 시각요소 필요시.
+  심플·강력 디자인 엔진 v3.2. 4톤(낮/밤×벤또/스크롤) + 믹스 모드 + 6포맷 + 8조 헌법(회색금지·형광펜적극·헤드 900·본문 300). 페르소나 2종(young-playful·KISAS) + Apple Keynote DS 풀스택 자산(scaffold HTML·deck-stage.js).
+  P1: 디자인스킬, 애플디자인, 애플벤또, 키노트벤또, 키노트스타일, 벤또그리드, bento grid, 낮모드, 밤모드, 라이트벤또, 다크벤또, 라이트스크롤, 다크스크롤, 큰글자스크롤, 믹스모드, Think패턴, 이쁘니디자인, 디자인반응형, 차트시각화, 다이어그램디자인, 인포그래픽디자인, 빅넘버디자인, 형광펜디자인, 영플레이풀, young-playful, 키사스디자인, KISAS, 마케팅벤또, KPI벤또, 분석벤또, 카드벤또, HTML스캐폴드, 스크롤스캐폴드, 벤또스캐폴드, 덱스테이지, HTML발표, HTML슬라이드, design scaffold.
+  P2: 디자인해줘, 이쁘니 해줘, 시각화해줘, 영하게, 벤또로, 키노트로, 낮모드로, 밤모드로, 큰글자로, 믹스로, design this, visualize, transform.
+  P3: light bento, dark bento, light scroll, dark scroll, mix mode, responsive, visualization, big number, highlighter, persona young-playful, persona KISAS.
+  P4: 산출물 생성시, HTML 시각요소 필요시, 마케팅 분석 한장 압축, KPI 대시보드, 캠페인 복기, 기능 요약 압축.
   P5: .html, .md, .pptx, .docx, .xlsx, .pdf.
-  NOT: UI설계(→ui-action-designer), 옵시디언문법(→obsidian-markdown).
+  NOT: UI설계(→ui-action-designer), 옵시디언문법(→obsidian-markdown), 일반HTML단순래핑(→html-div-style).
 "@uses":
+  - references/constitution.md
+  - references/color-system.md
+  - references/korean-typography.md
+  - references/fold-scroll.md
   - references/tokens.md
   - references/snippets.md
   - references/forbidden.md
@@ -20,12 +24,17 @@ description: |
   - references/format-xlsx.md
   - references/format-pdf.md
   - references/special-features.md
-  - references/tone-dark-cinema.md
-  - references/tone-warm-human.md
-  - references/tone-clean-info.md
-  - references/tone-pro-grid.md
-  - references/tone-story-dark.md
-  - references/tone-young-playful.md
+  - references/tone-light-bento.md
+  - references/tone-dark-bento.md
+  - references/tone-light-scroll.md
+  - references/tone-dark-scroll.md
+  - references/tone-mix.md
+  - references/persona-young-playful.md
+  - references/persona-kisas.md
+  - references/bento-patterns.md
+  - references/mode-html-bento.md
+  - references/mode-html-scroll.md
+  - references/layout-safety.md
   - references/protocol-pretty.md
   - references/engine-4layer.md
   - references/ux-principles.md
@@ -33,166 +42,148 @@ description: |
   - references/gotchas-extended.md
   - references/responsive.md
   - references/visualization-html.md
+  - references/scaffold-scroll.html
+  - references/scaffold-bento.html
+  - references/scaffold-deck.md
 ---
 
-# Design Skill
+# Design Skill v3.2
 
-디자인스킬(design-skill)은 Apple 디자인 원리 기반의 4층 엔진으로, 콘텐츠→시각화 매핑을 통해 인포그래픽·빅넘버·애플디자인 패턴을 6포맷(md·HTML·PPTX·DOCX·XLSX·PDF) 전체에 적용합니다.
+심플·강력 디자인 엔진. **8조 헌법** + **4톤(낮/밤 × 벤또/스크롤)** + **믹스 모드** + 6포맷.
 
-콘텐츠가 디자인을 결정한다. Apple KR 20 페이지 기반 4층 엔진.
+**v3.2 (2026-04-29):** §SELF_CHECK + §INVARIANT 신설·트리거 정밀화·Gotchas 보강 (skill-doctor 처방 4건 반영)
 
----
+**v3.1 (2026-04-29):** Apple Keynote DS 자산 흡수 (scaffold-scroll·scaffold-bento·deck-stage.js)
 
-## §-1. 프로젝트 컨텍스트 분기 (Tone Preselect)
-
-톤 판단(§4 Step2) 전에 프로젝트 컨텍스트를 선감지해 디폴트 톤을 바꾼다.
-
-| 컨텍스트 감지 | 디폴트 톤 | 근거 |
-|---------------|-----------|------|
-| 프로젝트 CLAUDE.md에 `project: kisas` / 대화에 "키사스/kisas" / 명시 호출("영톤·플레이풀") | `young-playful` | K-12 Apple 교육 페이지 앵커 |
-| 그 외 | 기존 5톤 중 콘텐츠 매칭 (warm-human / clean-info / dark-cinema / pro-grid / story-dark) | 기존 엔진 |
-
-**오버라이드:** 사용자가 톤을 명시 지정하면 컨텍스트보다 우선. 예: 키사스 프로젝트에서도 "미니멀하게 가줘" → clean-info.
-**C3 예외:** young-playful 선택 시 `tone-young-playful.md` 팔레트(형광펜 5색 + 블록배경 5색)가 C3 "유채색 1색"을 오버라이드한다. G8(그래디언트 1회)은 유지.
+**v3.0 (2026-04-29):** 헌법 교체 — 회색 원천 금지, 형광펜 적극, 헤드 무조건 900, 본문 300. 7톤 → 4톤 통폐합 + 믹스. 페르소나 2종 보존.
 
 ---
 
-## 4블록 참조 구조
+## §HEADER. 8조 헌법 (절대규칙)
 
-html-skill-refactor spine 공통 구조. 허브형 스킬 특성상 **4블록은 인덱스 역할**. 풀스펙은 기존 20개 스포크에 유지.
+| # | 조항 | 판정 |
+|---|---|---|
+| H1 | 배경 = 검정 OR 흰색 (낮/밤 2분법) | 그라디언트·다른색배경 → FAIL |
+| H2 | 컬러풀 = 박스·시각화·형광펜에만 (액센트 6색) | 본문 다채색 → FAIL |
+| H3 | 형광펜 적극 사용 (핵심 단어 강조) | 페이지당 0회 → 경고 |
+| H4 | 글자색 = 검정·흰색·컬러풀만. **회색 원천 금지** (텍스트·배경·보더) | 회색 사용 → FAIL. 단 §EXCEPT 비활성 폼 한정 허용 |
+| H5 | 표지·섹션·본문 헤드 = 가장 굵은 웨이트 (900) | <900 → FAIL |
+| H6 | 본문 내용만 가는 웨이트 (300) | ≥600 본문 → FAIL |
+| H7 | 최소 폰트 12px (PC 기준). 모바일 clamp는 12 하한 | <12 → FAIL |
+| H8 | 반응형 100% — clamp·viewport·터치≥44·≤640 1열·횡스크롤✗·한글줄바꿈 | 위반 → FAIL |
 
-| 블록 | 역할 | 로드 시점 |
-|------|------|-----------|
-| `references/tokens.md` | 공통 토큰 인덱스 (타이포 5스케일·색 3티어·Oxford Blue·반응형 clamp) → core-rules·responsive·format-* | §1 CORE 진입시 1회 |
-| `references/snippets.md` | 포맷×톤 스니펫 인덱스 → format-*·tone-*·engine 스포크 | §4 Step3·Step6 |
-| `references/forbidden.md` | 금지 카탈로그 (CORE FAIL 9·GUARD 8·HTML R1~R11·MD 8·Obsidian 14·PPTX·PDF) | §3 GUARD + §4 Step7 |
-| `references/qc.md` | 6층 QC 스코어카드 (CORE 9 trans·GUARD 8·포맷별 체크·정적게이트) | §4 Step7 QC |
-
-**로딩 규칙:** 4블록은 **인덱스**라 가볍게 항상 참조. 실제 상세는 기존 스포크로 위임 (최대 3스포크 룰 유지).
+**H 우선:** H1~H8은 톤·포맷·CORE 모두 우선. H 위반은 어떤 정당화도 무효.
 
 ---
 
-## 라우팅
+## §EXCEPT. 회색 예외 (극단)
 
-**로딩 규칙:** 작업당 최대 3스포크 — format 1 + tone 1 + (md→`protocol-pretty.md` | HTML→`visualization-html.md`). `engine-4layer.md`=§2 진입시 1회. `special-features.md`=S9·S14~S16 매칭시. `ux-principles.md`=CORE FAIL 후 QC 재검시. `visualization-html.md`=HTML 생성시 1회(C9).
+회색은 **거의** 0%. 다음 케이스만 5% 알파 컬러로 대체:
+- 비활성 폼 placeholder → `검정 30% 알파` (낮) / `흰색 30% 알파` (밤)
+- 비활성 버튼 → `보라 20% 알파`
+
+**원칙:** "회색 쓰고 싶다 = 알파 낮춘 컬러로 대체". 진짜 #888 같은 회색 = 영구 금지.
+
+---
+
+## §-1. 컨텍스트 분기 (Tone Preselect)
+
+| 감지 | 디폴트 톤 |
+|---|---|
+| `project: kisas` / "키사스" | `persona-kisas` |
+| "영톤·플레이풀·young" | `persona-young-playful` |
+| "낮모드·밝게·light·라이트" + "벤또" | `light-bento` |
+| "밤모드·어둡게·dark·다크" + "벤또" | `dark-bento` |
+| "큰글자스크롤·낮" / "낮 스크롤" | `light-scroll` |
+| "큰글자스크롤·밤" / "밤 스크롤" / 디폴트 | `dark-scroll` |
+| "믹스·섞어·mix" | `mix` |
+| 디폴트 (분석·KPI·마케팅 한장) | `light-bento` |
+| 디폴트 (제품·매니페스토·압축 키노트) | `dark-scroll` |
+
+**오버라이드:** 사용자 명시 우선.
+
+---
+
+## §SSOT. 단일 권위 출처
+
+| 블록 | 역할 | 위치 |
+|---|---|---|
+| `constitution.md` | 8조 헌법 풀버전 + 위반 카탈로그 | SSOT |
+| `color-system.md` | 6컬러 팔레트(보라 추가)·형광펜·CSS변수 | SSOT |
+| `korean-typography.md` | 헤드 900·본문 300·5단 스케일·12 하한 | SSOT |
+| `fold-scroll.md` | 접기/펴기 scrollBy(delta) | SSOT |
+| `tokens.md` | 토큰 인덱스 |
+| `snippets.md` | 포맷×톤 스니펫 |
+| `forbidden.md` | 금지 카탈로그 |
+| `qc.md` | 6층 QC 스코어카드 |
+
+본체는 SSOT에만. 다른 곳은 1줄 포인터.
+
+---
+
+## §ROUTING. 라우팅
+
+작업당 최대 3스포크 = format 1 + tone 1 + 보조 1.
 
 | 포맷 | 로드 |
-|------|------|
-| HTML | `format-html.md` + `visualization-html.md`(C9 필수) |
-| MD | `format-md.md` + `protocol-pretty.md` |
-| PPTX | `format-pptx.md` (압축 포함) |
-| DOCX/XLSX | `format-docx.md` / `format-xlsx.md` |
-| PDF | `format-pdf.md` (톤이 방향 결정) |
-| 특수기능 | `special-features.md` |
-| 톤조정 | `tone-{preset}.md` |
-| 4층 | `engine-4layer.md` |
+|---|---|
+| HTML 벤또 (light/dark) | `format-html` + `mode-html-bento` + `bento-patterns` + `layout-safety` + **`scaffold-bento.html`** |
+| HTML 스크롤 (light/dark) | `format-html` + `mode-html-scroll` + `layout-safety` + **`scaffold-scroll.html`** |
+| HTML 믹스 | `format-html` + `tone-mix` + 둘 다 |
+| **HTML 슬라이드 발표** | `format-html` + **`scaffold-deck.md`** + `assets/deck-stage.js` |
+| HTML 일반 | `format-html` + `visualization-html` |
+| MD | `format-md` + `protocol-pretty` |
+| PPTX/DOCX/XLSX/PDF | `format-{pptx·docx·xlsx·pdf}` |
+| 톤 | `tone-{light·dark}-{bento·scroll}.md` 또는 `tone-mix.md` |
+| 페르소나 | `persona-{young-playful·kisas}.md` (디폴트 4톤 무시·자체 컬러팔레트) |
 
-**우선순위:** tone > format > CORE 기본값. CORE FAIL 규칙(C1~C9)은 톤으로도 오버라이드 ✗ — 예외는 §0 공리 부명제로 정당화.
-
----
-
-## §0. 공리 — 4개
-
-규칙표에 없으면 공리로 판단.
-
-| # | 공리 | 도출 |
-|---|------|------|
-| X1 | 인지 유한성 | C3·C4·C6 |
-| X2 | 위계 효율 | C1·C2·C5 |
-| X3 | 리듬 원리 | C5·C7 |
-| X4 | 여백 증폭 | C4 |
-
-**부명제:** X2-a(고밀도=위계 간격 축소. clean-info C1 조정). 도출불가 → 형 확인.
-**UX 매핑(Nielsen10+Norman5):** → `ux-principles.md#G_AXIOM_MAPPING`. CORE 위반시 동시 점검.
+**우선순위:** H헌법 > tone > format > CORE 기본값.
 
 ---
 
-## §1. CORE — 9규칙
+## §1. CORE — 9규칙 (H헌법 하위)
 
-위반 불가. 톤(L1) 결정 시 자동 세팅.
+| # | 원칙 | 규칙 | 판정 |
+|---|---|---|---|
+| C1 | 타이포 비율 | L1:L2:L3:L4 = 4:2.3:1.5:1 (±10%) | 이탈→FAIL |
+| C2 | Weight 대비 | 헤드 900 ↔ 본문 300 (대비 600) | <600→FAIL |
+| C3 | 컬러 시스템 | **흰/검 + 6액센트(옐로우·민트·핑크·블루·코랄·보라)**. 본문 다채색 ✗ (H2) | 위반→FAIL |
+| C4 | 여백 | 콘텐츠 ≤55% | >55%→경고 |
+| C5 | 정렬 이분법 | 제목=중앙·본문=좌. md면제 | 본문중앙→FAIL |
+| C6 | 이미지-텍스트 분리 | 오버레이 ✗ | →FAIL |
+| C7 | 반복 금지 | 레이아웃·밀도 3연속 ✗ | 3연속→경고 |
+| C8 | 반응형 | clamp·viewport·터치≥44·≤640 1열·횡스크롤✗·한글줄바꿈 (H8) | 위반→FAIL |
+| C9 | 시각 전환 | 수치→차트, 프로세스→플로우, 시간축→타임라인, 관계→다이어그램, 핵심수치→big-number, 2축→매트릭스 | 소스2+ & 요소0→FAIL |
 
-| # | 원칙 | 규칙 | 판정 | 공리 |
-|---|------|------|------|------|
-| C1 | 타이포 비율 | L1:L2:L3:L4 = 4:2.3:1.5:1 (±10%) | 이탈→FAIL | X2 |
-| C2 | Weight 대비 | 제목wght − 본문wght ≥ 600 (제목 Black 900 ↔ 본문 Light 300 기본) | <600→FAIL | X2 |
-| C3 | 3색 시스템 | 배경 흰/검/밝은그레이, 유채색=CTA 1색(기본 #0066cc, Oxford Blue #002147 등록). 그래디언트=요청시. **라이트 배경=캔디 A 팔레트, 다크 배경=파스텔** (→ tokens.md §컬러풀 카드 팔레트). **카드/박스 안 텍스트는 항상 검정 — 흰글자는 검정 배경에서만 예외**. **컬러 시스템 룰 5종(R1~R5) 강제 — → §컬러시스템** | 유채색2+→FAIL·룰위반→FAIL | X1·X2 |
-| C4 | 여백 | 콘텐츠 ≤55% (xlsx: 행×1.2·열×1.3) | >55%→경고 | X4 |
-| C5 | 정렬 이분법 | 제목=중앙, 본문=좌. 병렬시 제목좌 허용. md면제 | 본문중앙→FAIL | X2·X3 |
-| C6 | 이미지-텍스트 분리 | 오버레이 ✗ | 오버레이→FAIL | X1 |
-| C7 | 반복 금지 | 레이아웃·밀도 3연속 ✗ | 3연속→경고 | X3 |
-| C8 | 반응형(HTML/웹MD) | clamp·viewport·터치≥44·≤640 1열·횡스크롤✗·**한글 줄바꿈 자연화 (R8 keep-all + R12 text-wrap:pretty + R13 balance + R14 nowrap 어절 보호)** | 위반→FAIL | X1·X4 |
-| C9 | 시각 전환(HTML/웹MD) | 시각소스 블록은 시각요소로 전환: 수치비교→차트, 프로세스→플로우, 시간축→타임라인, 관계→다이어그램, 핵심수치→big-number, 2축→매트릭스 | 소스2+ & 요소0→FAIL | X1·X2 |
-
-**세부:** `core-rules.md`(폰트·CTA 보조), `responsive.md`(C8), `visualization-html.md`(C9).
+세부: `core-rules.md`·`responsive.md`·`visualization-html.md`·`color-system.md`.
 
 ---
 
 ## §2. 4층 엔진
 
-`L1 문서(톤) → L2 섹션(역할) → L3 블록(패턴) → L4 요소(포인트)`
+`L1 톤 → L2 섹션 → L3 블록 → L4 요소`
+
+- **L1** 4톤(light-bento·dark-bento·light-scroll·dark-scroll) + 믹스 + 페르소나 2(young-playful·KISAS)
+- **L2** 7역할 (히어로·기능·증거·비교·CTA·클로징·부록) + 배경교대(C7)
+- **L3** 12 콘텐츠형태 → S1~S18 + 벤또 패턴 A~E
+- **L4** 자동(S1·S9·S12) + 수동(S14~S16) + 텍스트多 셀 Type 1~8
 
 풀매칭표·충돌해결 → `engine-4layer.md`.
-
-- **L1** 6톤(dark-cinema/warm-human/clean-info/pro-grid/story-dark/young-playful) — young-playful는 §-1 컨텍스트 분기로 선감지
-- **L2** 7역할(히어로·기능·증거·비교·CTA·클로징·부록) + 배경교대(C7)
-- **L3** 12 콘텐츠형태 → S1~S18, 충돌시 [톤친화도→구조서열] 2단계
-- **L4** 자동(S1·S9·S12) + 수동(S14~S16)
-
----
-
-## §C. 컬러 시스템 룰 (R1~R5) — v1.8
-
-다중 섹션·다중 카드 문서에서 컬러를 의미 단위로 정렬하는 룰. C3 보강.
-
-| # | 룰 | 정의 | 위반 시 |
-|---|---|---|---|
-| R1 | 페르소나 색 고정 | 같은 인물·역할·고객군은 문서 전체에서 같은 색 1개. 한번 정하면 모든 섹션·표·여정에서 동일 (예: A=pink, B=peach, C=lavender) | FAIL |
-| R2 | TOC ↔ 섹션 시그니처 1:1 | 차례 카드 색 = 해당 섹션 시그니처 색. 섹션 헤드 hl·다크블록 마무리 hl도 같은 색 | 경고 |
-| R3 | 컬러 셀 안 글자 = 블랙(#1d1d1f) | tone-색·인라인 background 컬러 위 텍스트 = 무조건 블랙 강제. dark·tone-white만 화이트. CSS `!important` + 자식 강제 셀렉터로 방어 | FAIL |
-| R4 | 페르소나 색 ↔ 의미 색 분리 | 페르소나에 쓴 색을 다른 용도(긴급/공백/기능 카드 등)에 재사용 ✗. 의미용은 시그니처+yellow·sky·lime·mint 등으로 | 경고 |
-| R5 | 비교 카드 = 무채색 vs 시그니처 | "옛 모델 vs 새 모델" 같은 대조는 dark + tone-시그니처 짝. 페르소나색으로 대조 짓지 ✗ | 경고 |
-
-**적용 범위:** 다중 섹션 BP·리포트·1pager·캠페인 분석. 1섹션 단일 산출물은 R2 면제.
-
-**HTML 구현 핵심 CSS (verbatim 박제 권장):**
-```css
-/* 컬러 배경 안 글자 = 무조건 블랙 강제 (R3) */
-.cell.tone-pink, .cell.tone-pink *, .cell.tone-peach, .cell.tone-peach *,
-.cell.tone-yellow, .cell.tone-yellow *, .cell.tone-lime, .cell.tone-lime *,
-.cell.tone-sky, .cell.tone-sky *, .cell.tone-mint, .cell.tone-mint *,
-.cell.tone-lavender, .cell.tone-lavender *, .cell.tone-pink-vivid, .cell.tone-pink-vivid *,
-[style*="background:var(--lime)"], [style*="background:var(--lime)"] *,
-[style*="background:var(--sky)"], [style*="background:var(--sky)"] *,
-tr[style*="background:var(--sky)"], tr[style*="background:var(--sky)"] * { color:#1d1d1f !important; }
-/* dark·tone-white만 화이트 (예외 2개) */
-.cell.dark, .cell.dark *, .cell.tone-white > .body, .cell.tone-white > .head,
-.cell.tone-white > .cap, .cell.tone-white > p { color:#ffffff !important; }
-/* tone-white 안 자식 컬러 셀은 다시 블랙 (자식 우선) */
-.cell.tone-white .cell.tone-pink, .cell.tone-white .cell.tone-pink *,
-.cell.tone-white .cell.tone-lime, .cell.tone-white .cell.tone-lime * { color:#1d1d1f !important; }
-```
-
-**공통 패턴 통일:**
-- 펼치기(`<details>`) 본문 = 셀 톤 안 / 출처 펼치기 = tone-white 통일
-- 다크블록 마무리 = 한 섹션 끝 1개. hl 색만 시그니처
-- 빅넘버 row(3카드) = 시그니처 + 보조 + 보조
 
 ---
 
 ## §3. GUARD — 패턴 과용 방지
 
-CORE=하한선(FAIL), GUARD=S패턴 과용(경고→수정).
-
 | # | 규칙 | 판정 |
-|---|------|------|
-| G1 | 이미지 비율 3종↓ | 4+→경고 |
-| G2 | 섹션당 CTA 2↓ | 3+→FAIL |
-| G3 | 인용문 ≥L2 | L3↓→경고 |
-| G4 | 테이블 6열↓ | 7+→분할 |
-| G5 | 폰트 단계 4↓ | 5+→FAIL |
-| G6 | S7 감성선언 2회↓ | 3+→경고 |
-| G7 | S9 형광펜 블록당 2구↓ | 3+→경고 |
-| G8 | S14 그래디언트 1회 | 2+→FAIL |
+|---|---|---|
+| G1 | 이미지 비율 ≤3 | 4+→경고 |
+| G2 | 섹션 CTA ≤2 | 3+→FAIL |
+| G3 | 인용 ≥L2 | L3↓→경고 |
+| G4 | 테이블 ≤6열 | 7+→분할 |
+| G5 | 폰트 단계 ≤4 | 5+→FAIL |
+| G6 | 감성선언 ≤2 | 3+→경고 |
+| G7 | **형광펜 페이지당 ≥1 (적극) ~ ≤8 (과용방지)** | 0=경고·9+=FAIL |
+| G8 | 그래디언트 ✗ (H1 강제) | 1+→FAIL |
 
 ---
 
@@ -200,17 +191,19 @@ CORE=하한선(FAIL), GUARD=S패턴 과용(경고→수정).
 
 ```
 1. 콘텐츠 수신
-1-b. §-1 컨텍스트 분기 체크 (프로젝트=키사스 → young-playful 프리셀렉트)
-2. L1 톤 판단 (확신도<70 → 형 1줄 확인). 프리셀렉트 있으면 해당 톤 우선
-3. 포맷 결정 → format 1 + tone 1 로드 (md=+pretty, HTML=+visualization)
-4. L2 섹션 분해 + 역할 + 리듬
-5. L3 블록 신호 → 패턴 매칭 (충돌시 engine-4layer 2단계)
-6. L4 요소 포인트 (자동+수동)
-7. QC: CORE9 + GUARD8 + UX_MAPPING
-   ├─ md → protocol-pretty QC(①~⑧)
-   ├─ HTML → C8(viewport·clamp·터치·1열·횡스크롤) + C9(시각소스→요소 전환율)
-   ├─ HTML 정적게이트 → `bash scripts/qc-mobile.sh output.html` (R2·R4b·R8·R9·R10·R11·R1a 검출)
-   ├─ FAIL → 롤백(C1~C5·C8·C9→Step4, G→Step6). 3회 FAIL → 형
+1-b. §-1 분기 → tone 확정
+2. H헌법 8조 사전점검 (배경·컬러·웨이트·폰트하한·반응형)
+3. 포맷 결정 → format 1 + tone 1
+4. L2 섹션 분해
+5. L3 블록 매칭 (벤또 A~E + 텍스트多 1~8)
+6. L4 요소
+7. QC: H헌법 8 + CORE9 + GUARD8 + UX_MAPPING
+   ├─ H 위반 → 즉시 차단 (어떤 정당화도 무효)
+   ├─ md → protocol-pretty ①~⑧
+   ├─ HTML → C8(viewport·clamp·터치·1열·한글) + C9(전환율) + 회색 grep
+   ├─ HTML 정적게이트 → `bash scripts/qc-mobile.sh output.html`
+   ├─ 회색 grep → `grep -E '#[0-9a-f]{3,6}|gray|grey' output.html` 매칭 시 H4 위반
+   ├─ FAIL → 롤백 (H→Step2·C→Step4·G→Step6·3회 → 형)
 8. 출력
 ```
 
@@ -218,45 +211,96 @@ CORE=하한선(FAIL), GUARD=S패턴 과용(경고→수정).
 
 ## §5. 스킬 연동
 
-- **pptx/docx/xlsx/pdf:** design-skill=값, 해당스킬=기술
-- **html-div-style:** 옵시디언 md+div. design-skill 완료 후 cascade
-- **ui-action-designer:** PRD·HTML 생성시 cascade. 대화분석만=skip
-- **protocol-pretty(이쁘니):** md 시각문법 SSOT. `protocol-pretty.md`
-- **apple-design-style:** 대체됨
+- pptx/docx/xlsx/pdf — design-skill=값, 해당스킬=기술
+- html-div-style — 옵시디언 md+div, design-skill 완료 후 cascade
+- ui-action-designer — PRD·HTML cascade
+- protocol-pretty(이쁘니) — md SSOT
 
 ---
 
+## §SELF_CHECK. 자가검증 게이트
 
-## §INV NO_WORK_LABEL (산출물·대화 본질 보호)
+스킬 출고 전 자가검증 필수 — 무자각 차단.
+
+```bash
+# 1. SKILL.md 무결성 (8헌법 + 9CORE + 8GUARD 카운트·스포크 36개·hub 한도)
+python scripts/validate.py ./
+
+# 2. 출력 HTML 8헌법 grep (회색·웨이트·폰트)
+bash scripts/qc-mobile.sh output.html
+
+# 3. 회색 위반 grep (H4 절대규칙)
+grep -nE '#([0-9a-f]{3}|[0-9a-f]{6})|gray|grey|silver' output.html | \
+  grep -vE 'rgba\(' | \
+  grep -vE '#000|#fff|#f0c850|#5dcaa5|#ed93b1|#378add|#d85a30|#7f77dd'
+# 매칭 = H4 위반·차단
+
+# 4. 본문 굵기 위반 (H6)
+grep -nE '<p[^>]*style[^>]*font-weight:\s*[6-9]00' output.html
+
+# 5. 12 미만 폰트 (H7)
+grep -nE 'font-size:\s*([0-9]|1[01])px(?!\d)' output.html
+```
+
+**실패 처리:** 1개라도 매칭 → STOP·재작성. silent ✗.
+
+---
+
+## §INVARIANT. 절대 보호
+
+| # | 항목 | 위반 결과 |
+|---|---|---|
+| INV1 | **8조 헌법 H1~H8** (constitution.md) — 어떤 정당화도 무효 | 즉시 차단·재작성 |
+| INV2 | **NO_WORK_LABEL** — 산출물·대화 = 인간 언어 | 출력 폐기·재출력 |
+| INV3 | **6액센트 팔레트** — 옐로우·민트·핑크·블루·코랄·보라 (변경·추가·삭제 ✗) | 색 추가 시 색 정의 변경 ✗·v 신설 |
+| INV4 | **회색 원천 금지 (H4)** — 텍스트·배경·보더 모두 검/흰/액센트만 | grep 매칭 시 즉시 차단 |
+| INV5 | **헤드 900 + 본문 300** — 모든 톤·페르소나에 동일 적용 | 위반 시 롤백 |
+
+INV는 톤·포맷·CORE 모두 우선. 자가합리화·예외 정당화 = FAIL.
+
+---
+
+## §INV NO_WORK_LABEL
 
 | 항목 | 정의 |
-|------|------|
+|---|---|
 | RULE | 산출물·대화 = 인간 언어. 작업 라벨 ZERO. (1만 페이지 1단어 = FAIL) |
-| 판정 | "이 단어, 이 대화 밖 사람이 사전 없이 읽을 수 있나?" NO → 작업 라벨 → 금지 |
-| ALLOW | 업계 전문용어(CSS·HTML·SVG·UX·UI·CTA·CSS변수·flexbox·grid·viewport·Apple HIG) · 고유명사(Apple·KISAS) |
-| CONVERT | 라벨 발견 → 실명·평문 풀어쓰기. 예) "4층 콘텐츠→디자인 매핑·6포맷·6톤·18패턴·C8/C9" → 결과만 노출 / "young-playful·이쁘니" → 톤 결과 평문 |
-| SELF_CHECK | 최종 시각자료 출력 직전에서 자체 스캔. 1개라도 발견 = 차단·재작성. paper-engine cascade 경유 시 INV 13 자동 적용 |
+| 판정 | "사전 없이 읽을 수 있나?" NO → 금지 |
+| ALLOW | 업계 전문용어(CSS·HTML·viewport·Pretendard·clamp·CTA) · 고유명사(Apple·KISAS·Keynote) |
+| CONVERT | "4층 매핑·6포맷·4톤·H1~H8·C8/C9·light-bento·dark-scroll·이쁘니·벤또" → 결과만 노출 |
+| SELF_CHECK | 출력 직전 자체 스캔. 1개라도 발견 = 차단·재작성 |
 
 ---
 
 ## Gotchas
 
-- **톤 과신:** 확신도<70 → 형 1줄 확인
-- **S패턴 과적용:** 블록당 2개+ ✗. 충돌 → engine-4layer 2단계
-- **L2 7역할 미포괄:** FAQ·용어집 등 유사 역할 매핑, 확신 ✗ → 형 확인
-- **UX가 CORE 덮어쓰기:** CORE 우선. UX는 해석 보강만
-- **engine-4layer 미로드 §2 진입:** §2 진입시 반드시 1회 로드
-- **C8 4함정:** 고정px·viewport누락·고정다열·고정포맷강제 → `responsive.md`
-- **C9 3함정:** HTML표·문장만·ASCII다이어그램·CDN차트라이브러리의존 → `visualization-html.md`
+- **회색 유혹:** "그냥 회색이 깔끔" → H4 영구 금지. 알파 낮춘 컬러로 대체
+- **본문 굵기 끌어올림:** 본문이 굵어져 헤드와 구분 안 됨 → C2 위반. 본문은 무조건 300
+- **형광펜 미사용:** 페이지에 형광펜 0개 → G7 경고. 핵심 단어 1~3개에 적극
+- **헤드 사이즈 미달:** H5 헤드는 무조건 900. 사이즈 작아도 웨이트는 절대 900
+- **모바일 12 미만:** clamp 하한이 12 미만이면 H7 위반
+- **밤모드에 검정텍스트:** dark-{bento·scroll}에서 검정 텍스트는 절대 ✗ → 흰색
+- **낮모드에 흰색텍스트:** light-{bento·scroll}에서 흰색 텍스트는 절대 ✗ → 검정 (단 컬러 박스 위에서는 흰색 OK)
+- **그라디언트 욕구:** H1 → 단색만. 그라디언트 = 즉시 FAIL
+- **C8 4함정:** 고정px·viewport누락·고정다열·고정포맷 → `responsive.md`
+- **C9 3함정:** HTML표·문장만·ASCII·CDN의존 → `visualization-html.md`
+- **자가검증 스킵:** §SELF_CHECK 5단계 grep 안 돌리고 출력 → 회색·웨이트 위반 누출
+- **INV 자가합리화:** "이번엔 예외" "본질 보존" 정당화 = INV 위반·즉시 차단
+- **모드 토글 누락:** scaffold-scroll·bento에서 `<body data-mode="dark|light">` 미설정 = 의도 불명
+- **scaffold 직카피:** scaffold-{scroll·bento}.html을 그대로 쓰면 콘텐츠 미반영. 베이스로 복사 후 콘텐츠 교체
 
-**세부 함정:** → `gotchas-extended.md`
+세부 → `gotchas-extended.md` · `constitution.md` 위반 카탈로그.
 
 ---
 
 ## Version
 
-- v1.8 (2026-04-29) — §C 컬러 시스템 룰(R1~R5) 신설. C3 보강. 페르소나 색 고정·TOC↔섹션 시그니처·컬러셀 글자 블랙 강제·페르소나↔의미 색 분리·비교카드 무채색vs시그니처. CSS verbatim 박제.
-- v1.7 (2026-04-23) — html-skill-refactor spine 적용. 4블록 인덱스(tokens·snippets·forbidden·qc) 추가, 기존 20스포크 유지.
-- v1.6 (2026-04-23) — C8 반응형 6규칙 추가. `scripts/qc-mobile.sh` 정적 게이트 신설.
-- v1.5 (2026-04-20) — young-playful 톤 신설 (K-12 Apple). §-1 프로젝트 컨텍스트 분기 추가.
-- v1.4 (2026-04-20) — C9 시각 전환 CORE 신설, visualization-html.md 추가.
+- **v3.2 (2026-04-29) — skill-doctor 처방 반영.** §SELF_CHECK 신설(5단계 grep 게이트) · §INVARIANT 신설(INV1~INV5 절대 보호) · P1 짧은키워드 제거(벤또·차트·영톤 → 벤또그리드·차트시각화·영플레이풀) · Gotchas 4행 추가(자가검증 스킵·INV 자가합리화·모드 토글·scaffold 직카피).
+- **v3.1 (2026-04-29) — Apple Keynote DS 자산 흡수.** scaffold-scroll.html (5섹션 스크롤 풀세트·IntersectionObserver 페이드인) · scaffold-bento.html (4-col 그리드 + 9컴포넌트 + 1024/640 리셋) · assets/deck-stage.js (1920×1080 슬라이드·키보드 네비·Print PDF) · scaffold-deck.md (사용 가이드). 6액센트(보라 포함) 호환 변환·회색 0%·형광펜 적극.
+- **v3.0 (2026-04-29) — 헌법 교체.** 8조 헌법 도입(회색금지·형광펜적극·헤드900·본문300·12하한). 7톤 → 4톤(light/dark × bento/scroll) + 믹스 + 페르소나 2. 6컬러 팔레트(보라 추가). C3 재정의(흰/검 + 6액센트).
+- v2.0 (2026-04-29) — apple-design 흡수, 7톤·SSOT 3종.
+- v1.8 (2026-04-29) — §C R1~R5 신설.
+- v1.7 (2026-04-23) — 4블록 인덱스 spine.
+- v1.6 (2026-04-23) — C8 R1~R11.
+- v1.5 (2026-04-20) — young-playful + §-1 분기.
+- v1.4 (2026-04-20) — C9 시각 전환 CORE.

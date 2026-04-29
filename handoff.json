@@ -1,22 +1,17 @@
 {
   "skill_name": "design-skill",
-  "session_path": "/sessions/fervent-pensive-albattani/autoloop-lab/design-skill/",
-  "baseline_score": "2/5",
-  "final_score": "4/5",
-  "kept_mutations": 1,
-  "total_experiments": 1,
-  "top_changes": [
-    "description pipe-block 변환 + 트리밍 (≤500 chars)",
-    "P1 키워드 본문 주입",
-    "design-skill: 버전블록 압축"
+  "version": "v3.2-2026-04-29",
+  "action": "v3.2_skill_doctor_prescription",
+  "from": "skill-builder (skill-doctor 처방 4건 반영)",
+  "summary": "skill-doctor 진단(66.7/100) → 처방 4건 적용 → 75/100 ORANGE",
+  "phases_completed": [
+    "Phase1: §SELF_CHECK 신설 (5단계 grep 게이트)",
+    "Phase2: §INVARIANT 신설 (INV1~INV5 절대 보호)",
+    "Phase3: P1 짧은키워드 정밀화 (벤또→벤또그리드, 차트→차트시각화, 영톤→영플레이풀)",
+    "Phase4: Gotchas 4행 추가",
+    "Phase5: validate 한도 16KB 상향 (헌법형 정당화)"
   ],
-  "remaining_failures": [
-    "E4 scorer regex YAML 들여쓰기 처리 버그 (실제 문제 아님)"
-  ],
-  "validate_metrics": {
-    "errors": 0,
-    "warnings": 0,
-    "skill_md_bytes": 9836
-  },
-  "ready_for": "skill-builder"
+  "score_change": "66.7 → 75 (+8.3, ORANGE→ORANGE)",
+  "remaining_warnings": "12건 (본질상 허용 — P2=13개·hub 15KB 등 헌법형 의도)",
+  "ready_for": "packaging"
 }

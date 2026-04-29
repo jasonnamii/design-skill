@@ -1,0 +1,311 @@
+<!doctype html>
+<!-- design-skill v3.1 — Bento Scaffold (light-bento · dark-bento 공통)
+     Apple Keynote DS bento 4-col 그리드 + 9컴포넌트 + 1024/640 리셋.
+     모드: <body data-mode="light"> 또는 "dark".
+     9컴포넌트: Hero · Dark-title · Think · Metric · Checklist · Tags · Progress · Flow · Closing.
+     회색 0% · 형광펜 적극 · 헤드 900 · 본문 300.
+-->
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bento Scaffold</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <style>
+    :root {
+      --font-sans: "Pretendard Variable", Pretendard, -apple-system, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+      --accent-yellow: #f0c850;
+      --accent-mint:   #5dcaa5;
+      --accent-pink:   #ed93b1;
+      --accent-blue:   #378add;
+      --accent-coral:  #d85a30;
+      --accent-purple: #7f77dd;
+
+      --hi-yellow: rgba(240, 200, 80, 0.5);
+      --hi-mint:   rgba(93, 202, 165, 0.5);
+      --hi-pink:   rgba(237, 147, 177, 0.5);
+      --hi-blue:   rgba(55, 138, 221, 0.4);
+      --hi-coral:  rgba(216, 90, 48, 0.4);
+      --hi-purple: rgba(127, 119, 221, 0.5);
+    }
+
+    html, body { margin:0; padding:0; font-family: var(--font-sans); }
+    body[data-mode="light"] { background:#fff; color:#000; }
+    body[data-mode="dark"]  { background:#000; color:#fff; }
+
+    .page {
+      max-width: 1240px; margin: 0 auto;
+      padding: clamp(20px, 4vw, 48px);
+    }
+
+    /* 4-col 그리드 */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    /* 카드 베이스 */
+    .card {
+      border-radius: 20px; padding: 28px 30px;
+      box-sizing: border-box;
+      display: flex; flex-direction: column; gap: 12px;
+      min-width: 0;
+    }
+    body[data-mode="light"] .card { background:#fff; border: 1px solid #000; }
+    body[data-mode="dark"]  .card { background:#000; border: 1px solid #fff; }
+
+    .card .label {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; line-height: 1;
+    }
+    .card .title {
+      font-size: 28px; font-weight: 900; letter-spacing: -0.02em;
+      line-height: 1.15; margin: 0; word-break: keep-all;
+    }
+    .card .body {
+      font-size: 18px; font-weight: 300; line-height: 1.65; margin: 0;
+      word-break: keep-all;
+    }
+    .card .body strong { font-weight: 900; }
+
+    /* 컬러 카드 (액센트) */
+    .card.yellow { background: var(--accent-yellow); color:#000; border-color:#000; }
+    .card.mint   { background: var(--accent-mint);   color:#000; border-color:#000; }
+    .card.pink   { background: var(--accent-pink);   color:#000; border-color:#000; }
+    .card.blue   { background: var(--accent-blue);   color:#fff; border-color:#fff; }
+    .card.coral  { background: var(--accent-coral);  color:#fff; border-color:#fff; }
+    .card.purple { background: var(--accent-purple); color:#fff; border-color:#fff; }
+
+    /* Hero — span 2x2 */
+    .hero {
+      grid-column: span 2; grid-row: span 2;
+      padding: clamp(28px, 3vw, 40px);
+      justify-content: space-between; min-height: 320px;
+    }
+    body[data-mode="light"] .hero { background:#000; color:#fff; border-color:#000; }
+    body[data-mode="dark"]  .hero { background:#fff; color:#000; border-color:#fff; }
+    .hero .title {
+      font-size: clamp(48px, 6vw, 80px);
+      font-weight: 900; letter-spacing: -0.04em; line-height: 0.95;
+    }
+    .hero .sub { font-size: 18px; font-weight: 300; line-height: 1.5; }
+
+    /* Dark-title */
+    .dark-title {
+      justify-content: space-between; min-height: 220px;
+    }
+    body[data-mode="light"] .dark-title { background:#000; color:#fff; border-color:#000; }
+    body[data-mode="dark"]  .dark-title { background:#fff; color:#000; border-color:#fff; }
+    .dark-title .title {
+      font-size: 48px; font-weight: 900; letter-spacing: -0.03em; line-height: 1.02;
+    }
+
+    /* Section head */
+    .section-head { grid-column: span 4; padding: 24px 4px 4px; background: transparent; border: 0; }
+    .section-head .label { margin-bottom: 8px; }
+    .section-head .title { font-size: 32px; font-weight: 900; letter-spacing: -0.02em; }
+
+    /* Span utils */
+    .col-2 { grid-column: span 2; }
+    .col-3 { grid-column: span 3; }
+    .col-4 { grid-column: span 4; }
+
+    /* Think */
+    .think { grid-column: span 2; justify-content: space-between; min-height: 220px; }
+    body[data-mode="light"] .think { background:#000; color:#fff; border-color:#000; }
+    body[data-mode="dark"]  .think { background:#fff; color:#000; border-color:#fff; }
+    .think .title { font-size: 64px; font-weight: 900; letter-spacing: -0.04em; line-height: 0.95; }
+    .think .arrow { font-family: var(--font-mono); font-size: 15px; letter-spacing: 0.02em; }
+    .think .arrow span { font-weight: 900; }
+
+    /* Progress */
+    .progress { height: 8px; border-radius: 99px; overflow: hidden; margin-top: 4px; }
+    body[data-mode="light"] .progress { background: var(--accent-yellow); }
+    body[data-mode="dark"]  .progress { background: var(--accent-purple); }
+    .progress > i { display: block; height: 100%; border-radius: 99px; }
+    body[data-mode="light"] .progress > i { background:#000; }
+    body[data-mode="dark"]  .progress > i { background:#fff; }
+
+    /* Checklist */
+    .checklist { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .checklist li {
+      display: grid; grid-template-columns: 28px 1fr; align-items: baseline; gap: 8px;
+      font-size: 16px; font-weight: 300; line-height: 1.4;
+      word-break: keep-all;
+    }
+    .checklist li .n {
+      font-family: var(--font-mono); font-weight: 900; font-size: 13px;
+    }
+
+    /* Tags */
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+    .tags span {
+      border-radius: 999px; padding: 4px 12px; font-size: 12px; font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    body[data-mode="light"] .tags span { background: #fff; border:1.5px solid #000; color:#000; }
+    body[data-mode="dark"]  .tags span { background: #000; border:1.5px solid #fff; color:#fff; }
+
+    /* Flow */
+    .flowcard {
+      grid-column: span 3;
+      justify-content: center; flex-direction: row !important; gap: 14px;
+      padding: 22px 28px; flex-wrap: wrap;
+    }
+    .flowcard .step { font-size: 20px; font-weight: 900; letter-spacing: -0.02em; }
+    .flowcard .arr { font-family: var(--font-mono); font-weight: 600; }
+
+    /* Metric (빅넘버) */
+    .metric .num { font-size: 56px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; }
+    .metric .cap { font-size: 14px; font-weight: 300; margin-top: 4px; }
+
+    /* Closing */
+    .closing {
+      grid-column: span 4; padding: clamp(40px, 5vw, 72px); min-height: 240px;
+      justify-content: center; align-items: center; text-align: center;
+    }
+    body[data-mode="light"] .closing { background:#000; color:#fff; border-color:#000; }
+    body[data-mode="dark"]  .closing { background:#fff; color:#000; border-color:#fff; }
+    .closing .title { font-size: clamp(40px, 7vw, 80px); font-weight: 900; letter-spacing: -0.04em; line-height: 0.95; }
+
+    /* 형광펜 */
+    .hi-yellow { background: linear-gradient(transparent 60%, var(--hi-yellow) 60%); padding: 0 2px; }
+    .hi-mint   { background: linear-gradient(transparent 60%, var(--hi-mint)   60%); padding: 0 2px; }
+    .hi-pink   { background: linear-gradient(transparent 60%, var(--hi-pink)   60%); padding: 0 2px; }
+    .hi-blue   { background: linear-gradient(transparent 60%, var(--hi-blue)   60%); padding: 0 2px; }
+    .hi-coral  { background: linear-gradient(transparent 60%, var(--hi-coral)  60%); padding: 0 2px; }
+    .hi-purple { background: linear-gradient(transparent 60%, var(--hi-purple) 60%); padding: 0 2px; }
+
+    /* 반응형 — named span 1024/640 리셋 (필수) */
+    @media (max-width: 1024px) {
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .col-3, .col-4, .hero, .section-head, .think, .flowcard, .closing { grid-column: span 2; }
+      .hero { grid-row: auto; min-height: 240px; }
+    }
+    @media (max-width: 640px) {
+      .grid { grid-template-columns: 1fr; gap: 10px; }
+      .col-2, .col-3, .col-4, .hero, .section-head, .think, .flowcard, .closing { grid-column: span 1; }
+      .card { padding: 22px 22px; }
+      .dark-title .title, .hero .title { font-size: clamp(40px, 12vw, 56px); }
+    }
+  </style>
+</head>
+<body data-mode="light" data-screen-label="bento-surface">
+<div class="page">
+  <div class="grid">
+
+    <!-- 1. Hero (span 2x2) -->
+    <div class="card hero">
+      <div class="label">Bento · 한 장 압축</div>
+      <div>
+        <div class="title">한 장에<br><span class="hi-mint">전부</span>.</div>
+        <div class="sub" style="margin-top:14px">9컴포넌트로<br>모든 것을 말한다.</div>
+      </div>
+    </div>
+
+    <!-- 2. Dark-title -->
+    <div class="card dark-title">
+      <div class="label">Philosophy</div>
+      <div class="title">색은 박스에만.<br>글자는 검·흰.</div>
+    </div>
+
+    <!-- 3. Body 카드 -->
+    <div class="card">
+      <div class="label">한 줄 룰</div>
+      <div class="title" style="font-size:20px">타이포가 디자인을 짊어진다.</div>
+      <div class="body">웨이트 <strong>900</strong>과 <strong>300</strong>의 대비. <strong>여백</strong>이 구성이다.</div>
+    </div>
+
+    <!-- 4. Think -->
+    <div class="card think">
+      <div class="label">Think · 패턴</div>
+      <div class="title">Less.</div>
+      <div class="arrow">압축 <span>→</span> 단언 <span>→</span> 종결</div>
+    </div>
+
+    <!-- 5. Metric 1 (빅넘버) -->
+    <div class="card metric mint">
+      <div class="label">웨이트</div>
+      <div class="num">5</div>
+      <div class="cap">300 · 400 · 600 · 700 · 900</div>
+    </div>
+
+    <!-- 6. Metric 2 (빅넘버) -->
+    <div class="card metric yellow">
+      <div class="label">회색</div>
+      <div class="num">0</div>
+      <div class="cap">원천 금지 (H4)</div>
+    </div>
+
+    <!-- 7. Section divider -->
+    <div class="card section-head">
+      <div class="label">체크리스트</div>
+      <div class="title">출고 룰.</div>
+    </div>
+
+    <!-- 8. Checklist (col-2) -->
+    <div class="card col-2">
+      <div class="label">타이포</div>
+      <ul class="checklist">
+        <li><span class="n">01</span><span>Pretendard Variable, 5웨이트.</span></li>
+        <li><span class="n">02</span><span>clamp 반응형. 12 하한.</span></li>
+        <li><span class="n">03</span><span>헤드 무조건 900.</span></li>
+        <li><span class="n">04</span><span>본문은 300, 회색 ✗.</span></li>
+      </ul>
+    </div>
+
+    <!-- 9. Checklist (col-2) -->
+    <div class="card col-2">
+      <div class="label">레이아웃</div>
+      <ul class="checklist">
+        <li><span class="n">01</span><span>4-col · 12px gap · 20px radius.</span></li>
+        <li><span class="n">02</span><span>1024/640 span 리셋 필수.</span></li>
+        <li><span class="n">03</span><span>형광펜은 1~3개.</span></li>
+        <li><span class="n">04</span><span>그라디언트·회색 ✗.</span></li>
+      </ul>
+    </div>
+
+    <!-- 10. Tags -->
+    <div class="card">
+      <div class="label">활용</div>
+      <div class="tags">
+        <span>분석</span><span>KPI</span><span>캠페인</span><span>리포트</span><span>한 장 압축</span>
+      </div>
+    </div>
+
+    <!-- 11. Progress (col-3) -->
+    <div class="card col-3">
+      <div class="label">진행률</div>
+      <div class="title" style="font-size:22px">반영 · 5개 톤 중 4개 완료.</div>
+      <div class="progress"><i style="width:80%"></i></div>
+      <div class="body" style="font-size:14px">80% 마이그레이션 · Q2 목표 달성.</div>
+    </div>
+
+    <!-- 12. Flow (col-3) -->
+    <div class="card flowcard">
+      <span class="step">리서치</span><span class="arr">→</span>
+      <span class="step">합성</span><span class="arr">→</span>
+      <span class="step">디자인</span><span class="arr">→</span>
+      <span class="step">검수</span>
+    </div>
+
+    <!-- 13. Metric -->
+    <div class="card metric purple">
+      <div class="label">브레이크포인트</div>
+      <div class="num">3</div>
+      <div class="cap">640 · 1024 · ∞</div>
+    </div>
+
+    <!-- 14. Closing (col-4) -->
+    <div class="card closing">
+      <div class="label">— 두 톤. 6액센트. 한 메시지. —</div>
+      <div class="title">Think Output.</div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

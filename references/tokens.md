@@ -32,7 +32,7 @@
 
 유채색 2개+ = FAIL. young-playful 톤은 팔레트 예외(`→ tone-young-playful.md`).
 
-**다크 컨테이너 매핑** (apple-box-design 공유):
+**다크 컨테이너 매핑** (→ `color-system.md` §10 SSOT):
 
 | Tier | 라이트 | 다크 |
 |---|---|---|

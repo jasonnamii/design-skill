@@ -52,7 +52,7 @@
 
 ## 공통 프리미티브 (허브 레벨)
 
-### 색상 변수 3분리 (apple-box-design 공유)
+### 색상 변수 3분리 (→ `color-system.md` §1 SSOT)
 
 ```css
 :root {

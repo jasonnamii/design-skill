@@ -58,7 +58,7 @@ md에서는 전부 좌측정렬 (C5 중앙정렬 면제). 표 내부만 정렬 �
 **예외 (사용자 명시시만):**
 - "HTML로" → 풀 HTML 전환
 - "박스로"·"카드로" → html-div-style cascade
-- "벤토로"·"시각화" → apple-box-design cascade
+- "벤또로"·"키노트로"·"애플벤또" → `apple-keynote` 톤 활성 (→ `tone-apple-keynote.md`)
 
 **검증:** `grep -E "<div|<span|style=" output.md` = ∅ 필수. ≠∅ 시 FAIL → 재작성.
 
